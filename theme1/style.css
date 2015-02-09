@@ -1,0 +1,281 @@
+
+img {
+
+}
+
+body {
+	font-family: verdana;
+}
+
+a{
+	transition: all .4s ease-in-out 0s;
+}
+
+.slicknav_menu{
+	display: none;
+}
+
+header.header_area {
+background: none repeat scroll 0 0 #222;
+border-bottom: 3px solid #ffd34e;
+padding: 20px 0;
+}
+
+div.logo a {
+  color: #ffd34e;
+  font-size: 20px;
+}
+div.logo a:hover {
+  text-decoration: none;
+}
+div.mainmenu {
+    padding: 0;
+}
+span.phn_lg {
+  color: #ddd;
+  font-size: 12px;
+  padding-left: 25px;
+}
+div.mainmenu ul#nav {
+margin: 0;
+padding: 0;
+text-align: right;
+}
+div.mainmenu ul#nav li {
+display: inline-block;
+list-style: outside none none;
+margin: 5px 15px;
+}
+div.mainmenu ul#nav li a {
+    color: #fff;
+}
+div.mainmenu ul#nav li a:hover, div.mainmenu ul#nav li a.active {
+    color: #ffd34e;
+	text-decoration: none;
+}
+
+div.socials ul {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+div.socials ul li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 5px;
+}
+div.socials ul li a {
+    color: #fff;
+}
+
+div.socials ul li a i {
+    transition: all .5s ease-in-out;
+}
+div.socials ul li a i:hover {
+    color: #ffd34e;
+	-moz-transform: rotate(-360deg);
+	-webkit-transform: rotate(-360deg);
+	transform: rotate(-360deg);
+}
+
+.slider_area{
+
+}
+
+.slider_area img{
+display: block;
+margin: 0 auto;
+}
+
+/* menus */
+
+div.menus_acc {
+  margin: 30px auto;
+}
+
+/* special offer */
+
+div.sp_offer div.sng_off_out {
+  padding: 2px;
+}
+
+.sng_off {
+border: 1px solid rgb(221, 221, 221);
+border-radius: 5px;
+padding: 15px;
+transition: all 0.4s ease-in-out 0s;
+}
+div.sng_off:hover {
+border-color: rgb(102, 175, 233);
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+outline: 0 none;
+}
+section.good_area {
+    padding: 50px 0;
+}
+div.good h1 {
+font-family: Lucida Console;
+margin: 40px auto;
+}
+div.good h1 i {
+    color: #bbb;
+    font-size: 30px;
+    margin: 0 15px;
+    vertical-align: top;
+}
+div.good p {
+    color: #555;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+a.more {
+    border: 1px solid #888;
+    color: #555;
+    display: inline-block;
+    padding: 8px 20px;
+}
+a.more:hover {
+    background: none repeat scroll 0 0 #ffd34e;
+    border: 1px solid #dfd;
+    color: #333;
+    text-decoration: none;
+}
+
+section.health_area {
+  padding: 50px 0;
+}
+
+div.health h1 {
+    color: #555;
+    font-family: Lucida Console;
+}
+div.health p {
+    color: #555;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+
+section.contact_area {
+background: url("img/maps.png") repeat scroll center center rgba(0, 0, 0, 0);
+border-top: 4px solid #ffd34e;
+padding: 140px 0 80px;
+}
+div.contact_info {
+  background: none repeat scroll 0 0 #111;
+  color: #fff;
+  padding: 45px;
+}
+a.map_lnk {
+  background: none repeat scroll 0 0 #ffd34e;
+  color: #000;
+  display: block;
+  margin: 0 auto;
+  padding: 8px 0;
+  text-align: center;
+  width: 195px;
+}
+div.contact_info h2 {
+    border-bottom: 1px dashed #fff;
+    color: #ffd34e;
+    margin: 10px auto 30px;
+    padding-bottom: 25px;
+}
+div.contact_info p {
+    font-size: 18px;
+}
+
+/* review */
+
+div.review {
+  margin: 80px auto;
+}
+.widget{
+	padding-bottom: 20px;
+}
+.widget h4{
+	border-bottom: 1px solid #ffd34e;
+	padding-bottom: 5px;
+}
+.rvw_name {
+  color: #333;
+  font-weight: bold;
+}
+.stars {
+  color: #ffd34e;
+}
+
+.reviews {
+  margin: 40px auto 20px;
+}
+div.sing_rev h4, div.sing_rev p {
+    margin: 5px auto;
+}
+div.sing_rev {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0 10px;
+}
+
+
+/* videos */
+
+div.all_videos {
+    margin: 60px auto;
+}
+div.videos {
+    margin: 80px auto 20px;
+}
+div.sing_vid {
+    margin-bottom: 70px;
+}
+
+
+/* photos */
+
+div.sng_photo {
+  margin: 0 auto 30px;
+}
+div.sng_photo a {
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+}
+div.sng_photo a:hover {
+  opacity: 0.9;
+}
+div.sng_photo a img {
+  height: 140px;
+  margin: 0px auto 10px;
+}
+
+
+/* menus */
+
+div.post_cont {
+    margin: 15px auto 90px;
+}
+div.post_cont p {
+    color: #444;
+    line-height: 25px;
+    margin-bottom: 35px;
+    text-align: justify;
+}
+
+.fb_sec {
+    width: 100%;
+}
+.fb_sec iframe {
+    border: medium none;
+	width: 100%;
+}
+
+.footer_area {
+    background: none repeat scroll 0 0 #ffd34e;
+    overflow: hidden;
+	padding: 20px 0;
+}
+div.footer_txt p {
+color: #333;
+margin: 0px auto;
+}
+div.footer_txt p a {
+
+}

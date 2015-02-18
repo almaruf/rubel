@@ -1,0 +1,307 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700,300);
+img {
+
+}
+
+body {
+	font-family: verdana;
+}
+
+a{
+	transition: all .4s ease-in-out 0s;
+}
+
+.slicknav_menu{
+	display: none;
+}
+
+header.header_area {
+background: none repeat scroll 0 0 rgb(64, 70, 80);
+border-bottom: 3px solid #ffd34e;
+padding: 20px 0;
+}
+
+div.logo a {
+  color: #ffd34e;
+  font-size: 20px;
+}
+div.logo a:hover {
+  text-decoration: none;
+}
+div.mainmenu {
+    padding: 0;
+}
+span.phn_lg {
+  color: #ddd;
+  font-size: 12px;
+  padding-left: 25px;
+}
+div.mainmenu ul#nav {
+margin: 0;
+padding: 0;
+text-align: right;
+}
+div.mainmenu ul#nav li {
+display: inline-block;
+list-style: outside none none;
+margin: 5px 15px;
+}
+div.mainmenu ul#nav li a {
+    color: #fff;
+}
+div.mainmenu ul#nav li a:hover, div.mainmenu ul#nav li a.active {
+    color: #ffd34e;
+	text-decoration: none;
+}
+
+div.socials ul {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+div.socials ul li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 5px;
+}
+div.socials ul li a {
+    color: #fff;
+}
+
+div.socials ul li a i {
+    transition: all .5s ease-in-out;
+}
+div.socials ul li a i:hover {
+    color: #ffd34e;
+	-moz-transform: rotate(-360deg);
+	-webkit-transform: rotate(-360deg);
+	transform: rotate(-360deg);
+}
+
+.slider_area{
+
+}
+
+.slider_area img{
+display: block;
+margin: 0 auto;
+}
+
+section.slider_area div.carousel-inner div.carousel-caption {
+top: 12%;
+}
+
+section.slider_area div.carousel-inner div.carousel-caption div.trnsprnt {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+  padding: 20px 10px;
+}
+
+section.slider_area div.carousel-inner div.carousel-caption div.trnsprnt h2 {
+  font-family: 'Oswald', sans-serif;
+  margin-top: 0px;
+}
+
+/* our works */
+
+section.our_works, section.cont_us_area, section.price_table, section.our_qualities {
+  margin: 50px auto 70px;
+}
+
+section.cont_us_area h3 {
+  font-family: 'Oswald', sans-serif;
+  margin: 12px auto;
+}
+
+section.our_works h2 span, section.cont_us_area h2 span, section.price_table h2 span, section.our_qualities h2 span {
+  border-top: 1px solid rgb(255, 211, 78);
+  display: block;
+  margin: 20px auto;
+  width: 15%;
+}
+
+
+.customNavigation a.btn {
+    background: none repeat scroll 0 0 rgb(255, 211, 78);
+    color: rgb(255, 255, 255);
+}
+.customNavigation {
+    margin-top: 50px;
+}
+
+section.our_works div#owl-demo div.owl-item a img {
+  margin: 0 auto;
+}
+
+#owl-demo .item{
+background: #3fbf79;
+padding: 30px 0px;
+margin: 10px;
+color: #FFF;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+text-align: center;
+}
+.customNavigation{
+text-align: center;
+}
+//use styles below to disable ugly selection
+.customNavigation a{
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/* pricing table */
+
+
+div.sng_price div.innr_price {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+}
+div.sng_price div.innr_price div.name {
+border-bottom: 1px solid rgb(221, 221, 221);
+font-family: "Oswald",sans-serif;
+font-size: 25px;
+padding: 30px 5px;
+text-transform: uppercase;
+}
+div.sng_price {
+    padding: 0 8px;
+}
+div.sng_price div.innr_price div.price {
+background: none repeat scroll 0 0 rgb(238, 238, 238);
+border-bottom: 1px solid rgb(221, 221, 221);
+font-family: "Oswald",sans-serif;
+font-size: 50px;
+padding: 10px 5px 20px;
+}
+div.sng_price div.innr_price div.price .sign, div.sng_price div.innr_price div.price .ext, div.sng_price div.innr_price div.price .month {
+    font-size: 25px;
+	font-weight: 300;
+}
+
+div.sng_price div.innr_price div.price .main {
+  color: rgb(34, 34, 34);
+  font-size: 80px;
+  font-weight: 800;
+}
+
+div.sng_price div.innr_price div.price .month{
+display: block;
+text-transform: uppercase;
+}
+
+div.sng_price div.innr_price div.features {
+  padding: 30px;
+}
+
+div.sng_price div.innr_price div.features p {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  font-family: "Oswald",sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 0;
+  padding: 12px 0;
+}
+
+div.sng_price div.innr_price div.features p b {
+  font-weight: 400;
+}
+
+div.sng_price div.innr_price a.btn {
+margin: 0 auto 35px;
+text-transform: uppercase;
+background: rgb(255, 196, 0);
+}
+
+
+
+div.selected {
+background: none repeat scroll 0 0 rgb(255, 196, 1);
+}
+div.selected .innr_price {
+    background: none repeat scroll 0 0 rgb(255, 196, 1);
+}
+div.selected .innr_price .price {
+    background: none repeat scroll 0 0 rgb(217, 167, 1);
+}
+
+div.sng_price div.selected div.price {
+  background: none repeat scroll 0 0 rgb(217, 167, 1);
+  border: medium none;
+  color: rgb(255, 255, 255);
+}
+
+
+div.sng_price div.selected div.price .main {
+  color: #ffffff;
+}
+
+div.sng_price div.selected div.name {
+  border-bottom: medium none;
+}
+
+div.sng_price div.selected div.features p b{
+	color: #eeeeee;
+}
+
+div.sng_price div.selected a.btn {
+background: none repeat scroll 0 0 rgb(85, 85, 85);
+border: 1px solid rgb(85, 85, 85);
+}
+
+div.sng_price div.selected {
+  border: 1px solid rgb(217, 167, 1);
+}
+
+/* our qualities */
+
+
+section.our_qualities div.sng_qual {
+    margin-bottom: 45px;
+}
+div.sng_qual p {
+    line-height: 25px;
+}
+div.sng_qual h3 i {
+    color: rgb(255, 196, 0);
+    font-size: 33px;
+    margin-right: 10px;
+}
+div.sng_qual h3 {
+    vertical-align: baseline;
+}
+
+/* contact-us */
+
+section.our_works h2, section.cont_us_area h2, div.sng_cont h3, section.price_table h2, section.our_qualities h2 {
+  font-family: 'Oswald', sans-serif;
+}
+
+div.sng_cont p {
+
+}
+
+div.sng_cont i {
+  color: rgb(255, 196, 0);
+  font-size: 50px;
+}
+
+.footer_area {
+background: none repeat scroll 0 0 rgb(64, 70, 80);
+overflow: hidden;
+padding: 30px 0;
+}
+div.footer_txt p {
+color: rgb(221, 221, 221);
+margin: 0px auto;
+}
+div.footer_txt p a {
+color: rgb(255, 255, 255);
+font-style: italic;
+}

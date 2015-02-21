@@ -129,7 +129,12 @@ section.our_works h2 span, section.cont_us_area h2 span, section.price_table h2 
 }
 
 section.our_works div#owl-demo div.owl-item a img {
-  margin: 0 auto;
+margin: 0 auto;
+transition: all 0.4s ease-in-out 0s;
+}
+
+section.our_works div#owl-demo div.owl-item a img:hover {
+  opacity: 0.8;
 }
 
 #owl-demo .item{
@@ -162,6 +167,11 @@ user-select: none;
 div.sng_price div.innr_price {
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
+}
+div.sng_price div.innr_price:hover{
+border-color: rgb(102, 175, 233);
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+outline: 0 none;
 }
 div.sng_price div.innr_price div.name {
 border-bottom: 1px solid rgb(221, 221, 221);
@@ -269,9 +279,13 @@ div.sng_qual p {
     line-height: 25px;
 }
 div.sng_qual h3 i {
-    color: rgb(255, 196, 0);
-    font-size: 33px;
-    margin-right: 10px;
+color: rgb(255, 196, 0);
+font-size: 33px;
+margin-right: 10px;
+transition: all 0.6s ease-in-out 0s;
+}
+div.sng_qual:hover h3 i {
+  transform: rotateY(180deg);
 }
 div.sng_qual h3 {
     vertical-align: baseline;
@@ -288,10 +302,13 @@ div.sng_cont p {
 }
 
 div.sng_cont i {
-  color: rgb(255, 196, 0);
-  font-size: 50px;
+color: rgb(255, 196, 0);
+font-size: 50px;
+transition: all 0.4s ease-in-out 0s;
 }
-
+div.sng_cont:hover i {
+  transform: rotateY(180deg);
+}
 .footer_area {
 background: none repeat scroll 0 0 rgb(64, 70, 80);
 overflow: hidden;

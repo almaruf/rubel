@@ -85,7 +85,8 @@ div.footer_txt p {
 }
 
 .carousel-inner {
-  min-height: 200px;
+background: none repeat scroll 0 0 rgb(64, 70, 80);
+min-height: 215px;
 }
 
 div.contact_info {

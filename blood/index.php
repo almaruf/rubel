@@ -124,22 +124,55 @@
 						<?php
 							for($inc = 0; $inc < 10; $inc++){
 								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
-							}	
+							}
 						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">মাস</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
+						<?php
+							for($inc = 0; $inc < 10; $inc++){
+								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							}
+						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">দিন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
+						<?php
+							for($inc = 0; $inc < 10; $inc++){
+								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							}
+						?>
+					</select>
+				  </div>
+				  <div class="form-group clearfix">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওজন (কেজি) :</label>
+					<input type="text" class="col-lg-6 col-md-6 col-sm-6 form-control" id="word" placeholder="আপনার ওজন">
+				  </div>
+				  <div class="form-group clearfix">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="district">শেষ কবে রক্ত দিয়েছেন :</label>
+					<select class="form-control dob">
+						<option value="">বছর</option>
+						<?php
+							for($inc = 0; $inc < 10; $inc++){
+								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							}
+						?>
+					</select>
+					<select class="form-control dob">
+						<option value="">মাস</option>
+						<?php
+							for($inc = 0; $inc < 10; $inc++){
+								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							}
+						?>
+					</select>
+					<select class="form-control dob">
+						<option value="">দিন</option>
+						<?php
+							for($inc = 0; $inc < 10; $inc++){
+								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							}
+						?>
 					</select>
 				  </div>
 				  <button type="add_donor_list" class="btn btn-info pull-right">তালিকাভুক্ত হোন</button>

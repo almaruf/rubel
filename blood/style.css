@@ -75,7 +75,7 @@ div.logo p a {
 /* blood seeker styles */
 div.wanted {
   border-right: 3px solid rgb(176, 0, 27);
-  margin: 50px auto;
+  margin: 50px auto 80px;
 }
 
 div.wanted form div.form-group label{
@@ -117,6 +117,34 @@ div.donor {
 /* footer styles */
 
 section.footer_area {
-  border-top: 2px solid rgb(176, 0, 27);
-  padding-top: 10px;
+background: none repeat scroll 0 0 rgb(255, 255, 255);
+border-top: 2px solid rgb(176, 0, 27);
+bottom: 0;
+padding: 20px 0;
+position: fixed;
+width: 100%;
+}
+section.footer_area p {
+  margin: 0 auto;
+}
+section.footer_area p a {
+color: rgb(176, 0, 27);
+}
+
+ul.footer_menu {
+    margin: 0;
+    padding: 0;
+}
+ul.footer_menu li {
+    border-right: 1px solid rgb(176, 0, 27);
+    display: inline-block;
+    padding-right: 10px;
+}
+ul.footer_menu li:last-child {
+    border: medium none;
+}
+selectorSavingError {
+}
+ul.footer_menu li a {
+    color: rgb(176, 0, 27);
 }

@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'SolaimanLipiNormal';
+    src: url('fonts/solaimanlipi.eot');
+    src: url('fonts/solaimanlipi.eot') format('embedded-opentype'),
+         url('fonts/solaimanlipi.woff') format('woff'),
+         url('fonts/solaimanlipi.ttf') format('truetype'),
+         url('fonts/solaimanlipi.svg#SolaimanLipiNormal') format('svg');
+}
+
+img {
+
+}
+
+body {
+	font-family: verdana;
+}
+
+h1,h2,h3,h4,h5,h6{
+
+}
+
+tbody tr{
+	background: #F5F5F5;
+}
+
+h2.htwo {
+  font: 22px/30px 'SolaimanLipiNormal';
+  margin: 5px auto;
+}
+
+a{
+	transition: all .4s ease 0s;
+}
+
+
+div.slicknav_menu{
+	display:none;
+}
+
+/* header styles */
+header{
+background: #B0001B;
+}
+div.header_right form {
+float: left;
+padding: 5px 0;
+}
+div.header_right form input[type="text"] {
+    height: 30px;
+    width: 140px;
+}
+div.header_right form input[type="password"] {
+    height: 30px;
+    width: 120px;
+}
+div.header_right form button {
+  padding: 4px 15px;
+}
+div.header_right p.pull-right {
+  color: rgb(255, 255, 255);
+  margin: 0;
+  padding: 11px 0 0;
+}
+div.header_right p.pull-right a {
+  color: rgb(255, 255, 255);
+}
+div.logo p {
+    margin: 10px auto;
+	color: rgb(255, 255, 255);
+}
+div.logo p a {
+    color: rgb(255, 255, 255);
+}
+
+/* blood seeker styles */
+div.wanted {
+  border-right: 3px solid rgb(176, 0, 27);
+  margin: 50px auto;
+}
+
+div.wanted form div.form-group label{
+font-weight: normal;
+margin: 7px auto;
+padding-left: 0;
+text-align: right;
+}
+
+div.wanted form div.form-group input {
+  width: 50%;
+}
+
+div.wanted form div.form-group input[type="radio"] {
+  margin: 15px auto;
+  width: 30px;
+}
+
+div.wanted form div.form-group select {
+  width: 250px;
+}
+
+div.wanted form div.form-group select.dob {
+  float: left;
+  margin-right: 5px;
+  width: 85px;
+}
+
+/* blood donor */
+
+div.donor {
+  border-right: medium none;
+}
+
+
+
+
+
+/* footer styles */
+
+section.footer_area {
+  border-top: 2px solid rgb(176, 0, 27);
+  padding-top: 10px;
+}

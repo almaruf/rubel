@@ -108,6 +108,9 @@
 				</form>
 				<?php } ?>
 			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 wanted donor">
+				<img src="img/donate-blood.png" alt="" />
+			</div>
 		</div>
 	</div>			
 	

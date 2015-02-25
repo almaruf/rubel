@@ -7,7 +7,7 @@
 				<p class="title"><b>রক্ত দরকার</b></p>
 				<hr />
 				<br />
-				<form method="post">
+				<form method="post" action="verification.php">
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
 					<input type="text" class="col-lg-6 col-md-6 col-sm-6 form-control" id="name" placeholder="আপনার নাম">
@@ -22,8 +22,8 @@
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donatefuture">ভবিষ্যতে আপনিও অন্যের দরকারে রক্ত দিতে চান :</label>
-						<input type="radio" name="donatefuture" id="donatefuture" value="yes"> হ্যাঁ
-						<input type="radio" name="donatefuture" id="donatefuture" value="no"> না
+						<input type="radio" name="donatebld" id="donatefuture" value="yes"> হ্যাঁ
+						<input type="radio" name="donatebld" id="donatefuture" value="no"> না
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
@@ -59,14 +59,14 @@
 					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওয়ার্ড :</label>
 					<input type="text" class="col-lg-6 col-md-6 col-sm-6 form-control" id="word" placeholder="আপনার ওয়ার্ড">
 				  </div>
-				  <button type="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
+				  <button type="submit" name="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
 				</form>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 wanted donor">
 				<p class="title"><b>রক্ত দিতে চাই</b></p>
 				<hr />
 				<br />
-				<form method="post">
+				<form method="post" action="verification.php">
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
 					<input type="text" class="col-lg-6 col-md-6 col-sm-6 form-control" id="name" placeholder="আপনার নাম">
@@ -182,7 +182,7 @@
 						?>
 					</select>
 				  </div>
-				  <button type="add_donor_list" class="btn btn-info pull-right">তালিকাভুক্ত হোন</button>
+				  <button type="submit" name="add_donor_list" class="btn btn-info pull-right">তালিকাভুক্ত হোন</button>
 				</form>
 			</div>
 		</div>

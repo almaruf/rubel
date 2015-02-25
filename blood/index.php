@@ -122,24 +122,31 @@
 					<select class="form-control dob">
 						<option value="">বছর</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							for($yr = 0; $yr <= 115; $yr++){
+								if($yr < 10){
+									echo '<option value="190'. $yr .'">190'. $yr .'</option>';
+								}elseif($yr <= 99){
+									echo '<option value="19'. $yr .'">19'. $yr .'</option>';
+								}else{
+									$yrN = substr($yr, 1,2);
+									echo '<option value="20'. $yrN .'">20'. $yrN .'</option>';
+								}
 							}
 						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">মাস</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							for($mnth = 1; $mnth <= 12; $mnth++){
+								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
 							}
 						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">দিন</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							for($dy = 1; $dy <= 31; $dy++){
+								echo '<option value="'. $dy .'">'. $dy .'</option>';
 							}
 						?>
 					</select>
@@ -153,24 +160,24 @@
 					<select class="form-control dob">
 						<option value="">বছর</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
-							}
+						for($yr = 0; $yr <= 5; $yr++){
+							echo '<option value="201'. $yr .'">201'. $yr .'</option>';
+						}
 						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">মাস</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							for($mnth = 1; $mnth <= 12; $mnth++){
+								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
 							}
 						?>
 					</select>
 					<select class="form-control dob">
 						<option value="">দিন</option>
 						<?php
-							for($inc = 0; $inc < 10; $inc++){
-								echo '<option value="190'. $inc .'">190'. $inc .'</option>';
+							for($dy = 1; $dy <= 31; $dy++){
+								echo '<option value="'. $dy .'">'. $dy .'</option>';
 							}
 						?>
 					</select>

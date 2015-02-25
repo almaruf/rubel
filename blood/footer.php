@@ -9,7 +9,7 @@
 						</ul>
 						<p class="pull-right"><a href=""><b>Home Page</b></a></p>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<p class="pull-right">&copy; ডিজাইন এবং ডেভেলপ করেছে <a href="">Hasan Fardous Rubel</a></p>
 					</div>
 				</div>

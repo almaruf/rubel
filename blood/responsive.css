@@ -1,0 +1,139 @@
+/* Big Screen Layout: 1200px. */
+
+@media only screen and (max-width: 1199px) {
+
+div.header_right form {
+  float: right;
+}
+
+div.header_right p.pull-right {
+  padding: 0 0 8px;
+}
+
+}
+
+/* Wide Tablet Layout: 980px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+div.wanted form div.form-group select.dob {
+padding: 6px 2px;
+}
+
+div.donor {
+  margin-bottom: 100px;
+}
+
+div.logo p {
+  float: right !important;
+  margin-bottom: 0;
+}
+
+}
+
+
+
+/* Tablet Layout: 768px. */
+
+@media only screen and (max-width: 767px) {
+
+div.logo, div.header_right {
+overflow: hidden;
+text-align: center;
+width: 100%;
+}
+
+div.header_right form {
+  margin: 0 25% 10px;
+  width: 50%;
+}
+
+div.header_right form input[type="text"], div.header_right form input[type="password"] {
+  width: 100%;
+}
+
+div.header_right p.pull-right {
+  float: none !important;
+}
+
+div.wanted form div.form-group label {
+  float: left;
+  width: 50%;
+}
+
+div.wanted form div.form-group input{
+  width: 50%;
+}
+
+div.wanted {
+  border-right: none;
+  margin: 50px auto 150px;
+}
+
+section.footer_area div.pull-left, section.footer_area div.col-xs-6{
+	width: 100%;
+}
+
+section.footer_area div.col-xs-6 p {
+  float: none !important;
+  margin: 10px auto 0;
+  text-align: center;
+}
+
+}
+
+
+
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+
+}
+
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (max-width: 600px) {
+
+
+}
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (max-width: 479px) {
+
+div.logo p {
+  float: none !important;
+}
+
+div.wanted {
+  border-right: none;
+  margin: 50px auto 180px;
+}
+
+ul.footer_menu {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+section.footer_area p {
+  float: none !important;
+  text-align: center;
+}
+
+
+}
+
+
+
+
+@media only screen and (max-width: 320px) {
+
+
+
+}

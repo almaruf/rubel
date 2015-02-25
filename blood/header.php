@@ -60,11 +60,11 @@ session_start();
 		<header class="header_area">
 			<div class="container header">
 				<div class="row">
-					<div class="col-md-6 logo">
+					<div class="col-lg-6 col-md-6 col-sm-6 logo">
 						<p class="pull-left"><a href="index.php">Directory for Blood Donor's of Bangladesh</a></p>
 						<p class="pull-right"><a href="index.php">বাংলা</a> / <a href="index.php">English</a></p>
 					</div>
-					<div class="col-md-6 header_right">
+					<div class="col-lg-6 col-md-6 col-sm-6 header_right">
 						<form class="form-inline">
 						  <div class="form-group">
 							<input type="text" class="form-control" placeholder="Phone no">

@@ -95,13 +95,16 @@ div.wanted form div.form-group input[type="radio"] {
 }
 
 div.wanted form div.form-group select {
-  width: 250px;
+  width: 50%
 }
 
 div.wanted form div.form-group select.dob {
   float: left;
-  margin-right: 5px;
-  width: 85px;
+  width: 16%;
+}
+
+div.wanted form div.form-group select.dob:last-child {
+  margin-right: 0;
 }
 
 /* blood donor */

@@ -1,41 +1,12 @@
 <?php 
 	include('header.php');
 	include('config.php');
-	if(isset($_POST['donate_blood'])){
-		$name = $_POST['name'];
-		$mobile = $_POST['mobile'];
-		$donor_number = $_POST['donor_number'];
-		$donate_blood = $_POST['donate_blood'];
-		$district = $_POST['district'];
-		$state = $_POST['state'];
-		$union = $_POST['union'];
-		$word = $_POST['word'];
-		$verification_code = mt_rand(100000, 999999);	//send this code to mobile phone
-		if( empty($name) || empty($mobile) || empty($donate_blood) || empty($district) || empty($state) || empty($union) || empty($word) ){
-			$search_donor_error = "You can not leave any field empty. Please re enter your details.";
-			header('refresh:3;url=index.php');
-		}else{
-			try{
-				if(!is_numeric($mobile)){
-					throw new Exception("Please enter your mobile number correctly.");
-				}
-				
-				$statement = $db->prepare("INSERT INTO blood_seeker VALUES(?,?,?,?,?,?,?,?,?,?)");
-				if( $statement->execute(array('', $name, $mobile, $donor_number, $donate_blood, $district, $state, $union, $word, $verification_code)) ){
-					$success_mesg = "Your information submitted successfully.";
-				}else{
-					$search_donor_error = "Your information did not submit successfully.";
-				}
-			}
-			catch (Exception $e) {
-				$search_donor_error = $e->getMessage();
-				header('refresh:3;url=index.php');
-			}
-		}
+	if( (!isset( $_REQUEST['id'] )) && (!isset( $_REQUEST['donate'] ))  ){
+		header('location:index.php');
 	}else{
-		//header('location:index.php');
+		$id = $_REQUEST['id'];
+		$donate = $_REQUEST['donate'];
 	}
-	
 	
 	if(isset($_POST['add_donor'])){
 		$ver_code = $_POST['ver_code'];
@@ -60,8 +31,8 @@
 				$donationYMD[] = $donation_month;
 				$donationYMD[] = $donation_day;
 				$last_donation = implode('-', $donationYMD);
-				$statement = $db->prepare("SELECT * FROM blood_seeker WHERE verification_code=?");
-				$statement->execute(array($ver_code));
+				$statement = $db->prepare("SELECT * FROM blood_seeker WHERE id=? && verification_code=?");
+				$statement->execute(array($id,$ver_code));
 				$match = $statement->rowCount();
 				$donorInfo = $statement->fetch(PDO::FETCH_ASSOC);
 				if( $match ) {
@@ -72,8 +43,8 @@
 					$state = $donorInfo['state'];
 					$seeker_union = $donorInfo['seeker_union'];
 					$word = $donorInfo['word'];
-					$insertDonor = $db->prepare("INSERT INTO blood_donor VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-					if ( $insertDonor->execute(array('', $name, $blood_group, $mobile, $donor_num, $district, $state, $seeker_union, $word, $donor_date_of_birth, $weight, $last_donation)) ) {
+					$insertDonor = $db->prepare("INSERT INTO blood_donor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					if ( $insertDonor->execute(array('', $name, $blood_group, $mobile, $donor_num, $district, $state, $seeker_union, $word, $donor_date_of_birth, $weight, $last_donation,'no-image.gif')) ) {
 						$current_id = $db->lastInsertId();
 						$success_mesg = "Your information submitted successfully to our donor list.";
 						header('location: user-details.php?id='.$current_id);
@@ -90,12 +61,38 @@
 			}
 		}
 	}
+	
+	
+	if ( isset( $_POST['go_next_page'] ) ) {
+		try{
+			$ver_code = $_POST['ver_code'];
+			if ( empty ( $ver_code ) ) {
+				throw new Exception('Please put your verification code here.');
+			}
+			$statement = $db->prepare("SELECT district,state,seeker_union,word,verification_code FROM blood_seeker WHERE id=? && verification_code=?");
+			$statement->execute(array($id,$ver_code));
+			$matchs = $statement->rowCount();
+			if ( $matchs != 0 ) {
+				$success_mesg = 'Valid code.';
+				$seeker_info = $statement->fetch(PDO::FETCH_ASSOC);
+				$seeker_dis = $seeker_info['district'];
+				$seeker_state = $seeker_info['state'];
+				$seeker_union = $seeker_info['seeker_union'];
+				$word = $seeker_info['word'];
+				header('refresh:3;url=donor-list-address-wise.php?district='. $seeker_dis .'&state='. $seeker_state .'&union='. $seeker_union.'&word='.$word);
+			}else{
+				throw new Exception('Wrong code!');
+			}
+		}
+		catch (Exception $e) {
+			$search_donor_error = $e->getMessage();
+		}	
+	}
 ?>
 	<div class="container">
 		<div class="row <?php echo date("Y-m-d");?>">
 			<div class="col-lg-6 col-md-6 col-sm-6 wanted">
 				<?php
-					if(isset($_POST['donate_blood']) && ($_POST['donate_blood'] == 'no')){
 					if(isset($search_donor_error)){
 				?>	
 				<div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -110,7 +107,9 @@
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_mesg;?>
 				</div>
-				<?php } ?>
+				<?php }
+					if($donate == 0){
+				?>	
 				<p class="title"><b>রক্ত দাতাদের তালিকা দেখতে হলে আপনার মোবাইলে পাঠানো কোডটি এখানে প্রবেশ করুন :</b></p>
 				<hr />
 				<br />
@@ -121,22 +120,8 @@
 				  </div>
 				  <button type="submit" name="go_next_page" class="btn btn-info pull-right">পরের পাতায় যান</button>
 				</form>
-				<?php }elseif(isset($_POST['donate_blood']) && ($_POST['donate_blood']  == 'yes')){
-					if(isset($search_donor_error)){
+				<?php }elseif($donate == 1){
 				?>	
-				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>Warning!</strong> <?php echo $search_donor_error;?>
-				</div>
-				<?php
-					}
-					if(isset($success_mesg)){
-				?>	
-				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_mesg;?>
-				</div>
-				<?php } ?>
 				<p class="title"><b>নতুন ব্যাবহারকারী তালিকাভূক্তি সম্পন্ন করুন এবং পরের পাতায় ডোনার লিস্ট দেখুন :</b></p>
 				<hr />
 				<br />

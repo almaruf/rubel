@@ -14,7 +14,7 @@
 		$secondary_mobile = $_POST['secondary_mobile'];
 		$district = $_POST['district'];
 		$state = $_POST['state'];
-		$seeker_union = $_POST['seeker_union'];
+		$donor_union = $_POST['seeker_union'];
 		$word = $_POST['word'];
 		$birth_year = $_POST['birth_year'];
 		$birth_month = $_POST['birth_month'];
@@ -34,10 +34,9 @@
 		  	 	 	 	 	 	 	 	 	 	 
 		$updateDonor = $db->prepare("UPDATE blood_donor SET name=?, blood_group=?, mobile=?, secondary_mobile=?, district=?, state=?, donor_union=?, word=?, date_of_birth=?, weight=?, last_donation=? WHERE id=?");
 		try{
-			if ( $insertDonor->execute(array('', $name, $blood_group, $mobile, $donor_num, $district, $state, $seeker_union, $word, $donor_date_of_birth, $weight, $last_donation)) ) {
-				$current_id = $db->lastInsertId();
+			if ( $updateDonor->execute(array($name, $blood_group, $mobile, $secondary_mobile, $district, $state, $donor_union, $word, $date_of_birth, $weight, $last_donation, $id)) ) {
 				$success_mesg = "Your information submitted successfully to our donor list.";
-				header('location: user-details.php?id='.$current_id);
+				header('location: user-details.php?id='.$id);
 			}else{
 				throw new Exception("Something went wrong.");
 			}
@@ -48,6 +47,7 @@
 		}
 	}
 ?>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 wanted">

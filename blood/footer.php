@@ -22,6 +22,5 @@
         <script src="js/main.js"></script>
         <script src="js/bootstrap.min.js"></script>
 		<script src="js/fancybox.js"></script>
-		<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
     </body>
 </html>

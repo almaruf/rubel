@@ -7,6 +7,36 @@
 	}else{
 		$id = $_REQUEST['id'];
 	}
+
+	if(isset($_POST['upd_img'])){
+		if(!empty($_FILES['profile_pic']['name'])){
+			$up_filename=$_FILES['profile_pic']['name'];
+			$file_basename = substr($up_filename, 0, strripos($up_filename, '.')); // strip extention
+			$file_ext = substr($up_filename, strripos($up_filename, '.')); // strip name
+			$img_name = $id. $file_ext;
+			
+			if(($file_ext!='.png')&&($file_ext!='.PNG')&&($file_ext!='.jpg')&&($file_ext!='.jpeg')&&($file_ext!='.gif')){
+				$upd_img_error_mesg = "Only jpg, jpeg, png and gif format images are allowed to upload.";
+			}else{
+				$img_size = $_FILES["profile_pic"]["size"] / 1024;
+				if($img_size > 100){
+					$upd_img_error_mesg = "Sorry! Your profile picture's size can not be more than 100kb.";
+				}else{
+					move_uploaded_file($_FILES['profile_pic']['tmp_name'],'img/users/' . $img_name);
+					$statement = $db->prepare("UPDATE blood_donor SET donor_img=? WHERE id=?");
+					if( $statement->execute(array($img_name, $id)) ){
+						$success_message = "Img Updated Successfully.";
+						header('refresh:3;url=user-details.php?id='.$id);
+					}else{
+						$upd_img_error_mesg = "Error";
+					}
+				}
+			}
+		}
+		else{
+			$upd_img_error_mesg = 'Sorry! You didn\'t select image.';
+		}
+	}
 ?>
 	<div class="container">
 		<div class="row">
@@ -34,9 +64,42 @@
 					<a href="" class="btn btn-info">পাসওয়ার্ড পরিবর্তন করুন</a>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 user_photo">
-					<img src="img/users/user1.jpg" class="img-responsive" alt="" />
-					<br />
-					<a href="" class="btn btn-info">ছবি পরিবর্তন করুন</a>
+					<?php
+						if(isset($upd_img_error_mesg)){
+					?>	
+					<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong> <?php echo $upd_img_error_mesg;?>
+					</div>
+					<?php
+						}
+						if(isset($success_message)){
+					?>	
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_message;?>
+					</div>
+					<?php }
+					if ( $user_info['donor_img'] != 'no-image.gif' ) { ?>
+					<img src="img/users/<?php echo $user_info['donor_img'];?>" class="img-responsive pull-right" alt="" />
+					<?php }else { ?>
+					<img src="img/users/no-image.gif" class="img-responsive pull-right" alt="" />
+					<?php } ?>
+					<div class="clearfix"></div><br />
+					<a class="fancybox btn btn-info pull-right" href="#pro_pic">ছবি পরিবর্তন করুন</a>
+				</div>
+				<div id="pro_pic" style="width:500px; display: none;">
+					<form action="" method="post" enctype="multipart/form-data">
+						<input id="uploadFile" class="form-control" placeholder="Choose File" disabled />
+						<div class="fileUpload btn btn-primary">
+							<span><i class="fa fa-upload"></i> Upload</span>
+							<input id="uploadBtn" name="profile_pic" type="file" class="upload" />
+						</div>
+						
+						<div style="clear:both"></div>
+						<br />
+						<button type="submit" name="upd_img" class="btn btn-success">Save Profile Picture</button>
+					</form>
 				</div>
 			</div>
 			

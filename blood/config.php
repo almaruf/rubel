@@ -4,7 +4,7 @@ $dbArray = include_once('../dbconfig.php');
 $dbhost = $dbArray['host'];
 $dbname = $dbArray['dbname'];
 $dbuser = $dbArray['username'];
-$dbpass = $dbArray['password']
+$dbpass = $dbArray['password'];
 
 try {
  $db = new PDO("mysql:host={$dbhost};dbname={$dbname}", $dbuser,$dbpass);

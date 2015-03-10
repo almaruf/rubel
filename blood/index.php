@@ -165,30 +165,52 @@
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
 					<select class="form-control" name="district">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
+						<?php
+							$divisions = include_once('address-list.php');
+							foreach($divisions as $divisionName => $divisionDetails) {
+								echo '<optgroup label="'.$divisionDetails['name_bn'].'">';
+								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
+									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
+								}
+								echo '</optgroup>';
+							}
+						?>
 					</select>
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার থানা :</label>
 					<select class="form-control" name="state">
 						<option value="">আপনার থানা পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
+						<?php
+							foreach($divisions as $divisionName => $divisionDetails) {
+							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
+								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
+								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
+									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
+								  }
+								echo '</optgroup>';  
+							  }
+
+							}
+						?>
 					</select>
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">ইউনিয়ন/সিটি কর্পোরেশন :</label>
 					<select class="form-control" name="seeker_union">
 						<option value="">পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
+						<?php
+							foreach($divisions as $divisionName => $divisionDetails) {
+							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
+								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
+								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
+									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
+								  }
+								echo '</optgroup>';  
+							  }
+
+							}
+						?>
 					</select>
 				  </div>
 				  <div class="form-group clearfix">
@@ -250,7 +272,6 @@
 					<select class="form-control" name="district">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
-							$divisions = include_once('address-list.php');
 							foreach($divisions as $divisionName => $divisionDetails) {
 								echo '<optgroup label="'.$divisionName.'">';
 								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
@@ -268,7 +289,7 @@
 						<?php
 							foreach($divisions as $divisionName => $divisionDetails) {
 							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtName.'">';
+								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
 								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
 									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
 								  }
@@ -286,7 +307,7 @@
 						<?php
 							foreach($divisions as $divisionName => $divisionDetails) {
 							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtName.'">';
+								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
 								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
 									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
 								  }

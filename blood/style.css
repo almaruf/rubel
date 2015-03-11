@@ -19,8 +19,12 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
+.nopadding{
+	padding: 0;
+}
+
 tbody tr{
-	background: #F5F5F5;
+
 }
 
 h2.htwo {
@@ -144,6 +148,35 @@ div.user_photo img:hover {
 }
 
 
+div.upload_field {
+    margin-bottom: 15px;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+input#uploadFile {
+  float: left;
+  width: 80%;
+}
+div#pro_pic {
+  padding: 15px;
+}
+
+
 /* footer styles */
 
 section.footer_area {
@@ -177,4 +210,50 @@ selectorSavingError {
 }
 ul.footer_menu li a {
     color: rgb(176, 0, 27);
+}
+
+
+/* admin page styles */
+
+div.admin_sidebar_left {
+  
+}
+
+div.admin_sidebar_left ul {
+    margin: 0;
+    padding: 0;
+}
+div.admin_sidebar_left ul li {
+    list-style: outside none none;
+}
+div.admin_sidebar_left ul li a {
+    color: rgb(85, 85, 85);
+    font-size: 20px;
+	color: rgb(176, 0, 27);
+}
+div.admin_sidebar_left ul li a:hover {
+    color: #555;
+}
+div.admin_sidebar_left ul ul {
+    padding-left: 20px;
+}
+div.admin_sidebar_left ul ul li {
+    list-style-type: square;
+	color: rgb(176, 0, 27);
+}
+div.admin_sidebar_left ul ul li a {
+    font-size: 14px;
+}
+div.admin_sidebar_left ul ul li a:hover {
+  padding-left: 5px;
+  text-decoration: none;
+}
+div.admin_sidebar_left .well {
+  background: none repeat scroll 0 0 rgb(176, 0, 27);
+  border: medium none;
+  color: rgb(255, 255, 255);
+}
+div.admin_sidebar_right {
+  border-left: 3px solid rgb(176, 0, 27);
+  margin: 50px auto 80px;
 }

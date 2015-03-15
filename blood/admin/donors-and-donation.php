@@ -1,7 +1,7 @@
 <?php 
 	include('header.php');
 	include('../classes/Donor.php');
-	include('../config.php');
+	include('config.php');
 	$statement1 = $db->prepare("SELECT * FROM blood_donor");
 	$statement1->execute();
 	$tot_donor = $statement1->rowCount();

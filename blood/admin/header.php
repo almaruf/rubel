@@ -52,6 +52,68 @@ session_start();
 			color:#fff; 
 		}
 		</style>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+          google.load('visualization', '1', {'packages':['corechart']});
+          google.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');    
+            data.addColumn('number', 'Slices');
+            data.addRows([
+              ['Male', 3],
+              ['Female', 1]
+            ]);
+            // Create the data table.
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'Topping');
+            data2.addColumn('number', 'Slices');
+            data2.addRows([
+              ['18-25', 3],
+              ['26-30', 1],
+              ['31-45', 6],
+              ['45+', 4]
+            ]);
+
+            // Create the data table.
+            var data3 = new google.visualization.DataTable();
+            data3.addColumn('string', 'Topping');
+            data3.addColumn('number', 'Slices');
+            data3.addRows([
+              ['Dhaka', 3],
+              ['Chittagonj', 2],
+              ['Sylhet', 5],
+              ['Rajshahi', 1],
+              ['Jessore', 4],
+              ['Barishal', 3]
+            ]);
+
+            // Set chart options
+            var options = {'title':'Number Of Donor By Gender',
+                           is3D : true,
+						   'width':400,
+                           'height':300};
+            // Set chart options
+            var options2 = {'title':'Number Of Donors By Age Group',
+                           is3D : true,
+						   'width':400,
+                           'height':300};
+            // Set chart options
+            var options3 = {'title':'Number Of Donors By Divisions',
+                           is3D : true,
+						   'width':900,
+                           'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+            var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+            chart2.draw(data2, options2);
+            var chart3 = new google.visualization.PieChart(document.getElementById('chart_div3'));
+            chart3.draw(data3, options3);
+
+          }
+		</script>
     </head>
     <body class="index">
 		<!--[if lt IE 7]>

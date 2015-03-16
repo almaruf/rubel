@@ -163,20 +163,24 @@
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district">
+					<select class="form-control" name="district" onchange="this.form.submit()">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
+							if ( isset ( $_POST['district'] ) ) {
+								$dist =  $_POST['district'];
+								echo '<option selected value="'.$dist.'">'.$dist.'</option>';
+							}
 							$divisions = include_once('address-list.php');
 							foreach($divisions as $divisionName => $divisionDetails) {
-								echo '<optgroup label="'.$divisionDetails['name_bn'].'">';
-								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
-								}
-								echo '</optgroup>';
+								echo '<option value="'.$divisionName.'">'.$divisionDetails['name_bn'].'</option>';
 							}
 						?>
 					</select>
 				  </div>
+				  <?php
+					if ( isset( $_POST['district'] ) ) {
+						$dist = $_POST['district'];
+				  ?>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার থানা :</label>
 					<select class="form-control" name="state">
@@ -195,28 +199,7 @@
 						?>
 					</select>
 				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">ইউনিয়ন/সিটি কর্পোরেশন :</label>
-					<select class="form-control" name="seeker_union">
-						<option value="">পছন্দ করুন</option>
-						<?php
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-								  }
-								echo '</optgroup>';  
-							  }
-
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="seeker_word">আপনার ওয়ার্ড :</label>
-					<input type="text" name="seeker_word" class="col-lg-6 col-md-6 col-sm-6 form-control" id="word" placeholder="আপনার ওয়ার্ড">
-				  </div>
+				  <?php } ?>
 				  <button type="submit" name="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
 				</form>
 			</div>

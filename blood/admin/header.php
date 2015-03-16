@@ -1,6 +1,9 @@
 <?php
 ob_start();
 session_start();
+$file_name = basename($_SERVER['PHP_SELF']);
+$main_file_num = strripos($file_name,'.');
+$main_file_name = substr($file_name,0,$main_file_num);
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -52,6 +55,9 @@ session_start();
 			color:#fff; 
 		}
 		</style>
+		<?php
+			if ( $main_file_name == 'donors-report' ) {
+		?>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
           google.load('visualization', '1', {'packages':['corechart']});
@@ -114,6 +120,7 @@ session_start();
 
           }
 		</script>
+		<?php } ?>
     </head>
     <body class="index">
 		<!--[if lt IE 7]>

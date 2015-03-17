@@ -162,13 +162,13 @@
 						<input type="radio" name="donate_blood" id="donatefuture" value="no"> না
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district" onchange="this.form.submit()">
-						<option value="">আপনার জেলা পছন্দ করুন</option>
+					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
+					<select class="form-control" name="division" onchange="this.form.submit()">
+						<option value="">আপনার বিভাগ পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['district'] ) ) {
-								$dist =  $_POST['district'];
-								echo '<option selected value="'.$dist.'">'.$dist.'</option>';
+							if ( isset ( $_POST['division'] ) ) {
+								$div =  $_POST['division'];
+								echo '<option selected value="'.$div.'">'.$div.'</option>';
 							}
 							$divisions = include_once('address-list.php');
 							foreach($divisions as $divisionName => $divisionDetails) {
@@ -178,25 +178,56 @@
 					</select>
 				  </div>
 				  <?php
-					if ( isset( $_POST['district'] ) ) {
-						$dist = $_POST['district'];
+					if ( isset ( $div ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার থানা :</label>
-					<select class="form-control" name="state">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
+					<select class="form-control" name="district" onchange="this.form.submit()">
+						<option value="">আপনার জেলা পছন্দ করুন</option>
+						<?php
+							if ( isset ( $_POST['district'] ) ) {
+								$dist =  $_POST['district'];
+								echo '<option selected value="'.$dist.'">'.$dist.'</option>';
+							}
+							//array_search( $_POST['district'], $divisions );
+							foreach($divisions as $divisionName => $divisionDetails) {
+							  if ($divisionName == $div) {
+							  echo '<optgroup label="'.$div.'">';
+								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
+									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
+								}	
+								echo '</optgroup>';	
+								}
+							}  
+						?>
+					</select>
+				  </div>
+				  <?php
+					}
+					if ( isset ( $dist ) ) {
+				  ?>
+				  <div class="form-group clearfix">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="thana">আপনার জেলা :</label>
+					<select class="form-control" name="thana" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
+							if ( isset ( $_POST['thana'] ) ) {
+								$thana =  $_POST['thana'];
+								echo '<option selected value="'.$thana.'">'.$thana.'</option>';
+							}
 							foreach($divisions as $divisionName => $divisionDetails) {
 							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-								  }
-								echo '</optgroup>';  
+								 if ($districtName == $dist) {
+									echo '<optgroup label="'.$dist.'">';
+									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
+										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
+									  }
+									echo '</optgroup>';  
+								}
 							  }
 
 							}
-						?>
+						?> 
 					</select>
 				  </div>
 				  <?php } ?>

@@ -76,6 +76,80 @@ div.logo p a {
     color: rgb(255, 255, 255);
 }
 
+
+div.find_donors {
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 5px;
+    margin: 50px auto;
+}
+div.find_donors h3, div.active_donors h3, div.messages h3 {
+    margin: 20px auto 50px;
+	text-align: center;
+	color: rgb(176, 0, 27);
+}
+div.find_donors div.sng {
+    margin-bottom: 50px;
+}
+div.find_donors div.sng img:hover {
+	opacity: .8;
+}
+div.find_donors div.sng a img {
+    display: block;
+    margin: 0 auto;
+	transition: all .4s ease-in-out 0s;
+}
+div.find_donors div.sng p.text-center {
+  color: rgb(176, 0, 27);
+  font-size: 18px;
+  margin: 5px auto;
+}
+
+div.messages div.sng_msg div.user_info p.usr a {
+  background: none repeat scroll 0 0 rgb(245, 114, 134);
+  border-radius: 100%;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  height: 50px;
+  padding: 15px;
+  width: 50px;
+}
+div.messages div.evn div.user_info p.usr a {
+  background: none repeat scroll 0 0 rgb(217, 62, 86);
+}
+div.messages div.odd div.msgs, div.messages div.evn div.msgs {
+  background: none repeat scroll 0 0 rgb(245, 114, 134);
+  border-radius: 5px;
+  padding: 20px;
+}
+div.messages div.evn div.msgs {
+  background: none repeat scroll 0 0 rgb(217, 62, 86);
+}
+div.messages div.odd div.msgs p, div.messages div.evn div.msgs p {
+  color: rgb(255, 255, 255);
+}
+div.messages div.odd div.msgs:before {
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid rgb(245, 114, 134);
+  border-top: 10px solid transparent;
+  content: "";
+  height: 0;
+  position: absolute;
+  right: 100%;
+  top: 20px;
+  width: 0;
+}
+div.messages div.evn div.msgs:before {
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid rgb(217, 62, 86);
+  border-top: 10px solid transparent;
+  content: "";
+  height: 0;
+  position: absolute;
+  left: 100%;
+  top: 20px;
+  width: 0;
+}
+
 /* blood seeker styles */
 div.wanted {
   border-right: 3px solid rgb(176, 0, 27);

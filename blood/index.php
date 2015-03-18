@@ -1,6 +1,6 @@
 <?php 
 	include('header.php');
-	//include('address-list.php');
+	include('classes/Donor.php');
 	include('config.php');
 	if(isset($_POST['search_donor'])){
 		$name = $_POST['name'];
@@ -123,288 +123,119 @@
 ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 wanted">
-				<p class="title"><b>রক্ত দরকার</b></p>
-				<hr />
-				<br />
-				<?php
-					if(isset($search_donor_error)){
-				?>	
-				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>Warning!</strong> <?php echo $search_donor_error;?>
+			<div class="find_donors clearfix">
+				<h3>গ্রুপ অনুসারে রক্তদাতা খুঁজুন</h3>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/a_positive.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
 				</div>
-				<?php
-					}
-					if(isset($success_mesg)){
-				?>	
-				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_mesg;?>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/a_negative.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
 				</div>
-				<?php } ?>
-				<form method="post">
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
-					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" id="name" placeholder="আপনার নাম">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="yourphone">আপনার মোবাইল :</label>
-					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" id="yourphone" placeholder="আপনার মোবাইল">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার ডোনার নম্বর (যদি থাকে) :</label>
-					<input type="text" name="seeker_number" class="col-lg-6 col-md-6 col-sm-6 form-control" id="donornumber" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donatefuture">ভবিষ্যতে আপনিও অন্যের দরকারে রক্ত দিতে চান :</label>
-						<input type="radio" name="donate_blood" id="donatefuture" value="yes"> হ্যাঁ
-						<input type="radio" name="donate_blood" id="donatefuture" value="no"> না
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
-					<select class="form-control" name="division" onchange="this.form.submit()">
-						<option value="">আপনার বিভাগ পছন্দ করুন</option>
-						<?php
-							if ( isset ( $_POST['division'] ) ) {
-								$div =  $_POST['division'];
-								echo '<option selected value="'.$div.'">'.$div.'</option>';
-							}
-							$divisions = include_once('address-list.php');
-							foreach($divisions as $divisionName => $divisionDetails) {
-								echo '<option value="'.$divisionName.'">'.$divisionDetails['name_bn'].'</option>';
-							}
-						?>
-					</select>
-				  </div>
-				  <?php
-					if ( isset ( $div ) ) {
-				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district" onchange="this.form.submit()">
-						<option value="">আপনার জেলা পছন্দ করুন</option>
-						<?php
-							if ( isset ( $_POST['district'] ) ) {
-								$dist =  $_POST['district'];
-								echo '<option selected value="'.$dist.'">'.$dist.'</option>';
-							}
-							//array_search( $_POST['district'], $divisions );
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  if ($divisionName == $div) {
-							  echo '<optgroup label="'.$div.'">';
-								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
-								}	
-								echo '</optgroup>';	
-								}
-							}  
-						?>
-					</select>
-				  </div>
-				  <?php
-					}
-					if ( isset ( $dist ) ) {
-				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="thana">আপনার জেলা :</label>
-					<select class="form-control" name="thana" onchange="this.form.submit()">
-						<option value="">আপনার থানা পছন্দ করুন</option>
-						<?php
-							if ( isset ( $_POST['thana'] ) ) {
-								$thana =  $_POST['thana'];
-								echo '<option selected value="'.$thana.'">'.$thana.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								 if ($districtName == $dist) {
-									echo '<optgroup label="'.$dist.'">';
-									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-									  }
-									echo '</optgroup>';  
-								}
-							  }
-
-							}
-						?> 
-					</select>
-				  </div>
-				  <?php } ?>
-				  <button type="submit" name="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
-				</form>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 wanted donor">
-				<p class="title"><b>রক্ত দিতে চাই</b></p>
-				<hr />
-				<br />
-				<?php
-					if(isset($error_message)){
-				?>	
-				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>Warning!</strong> <?php echo $error_message;?>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/b_positive.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
 				</div>
-				<?php
-					}
-					if(isset($added_donor)){
-				?>	
-				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $added_donor;?>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/b_negative.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
 				</div>
-				<?php } ?>
-				<form method="post" action="">
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
-					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার নাম">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার রক্তের গ্রুপ :</label>
-					<select class="form-control" name="blood_group">
-						<option value="">পছন্দ করুন</option>
-						<option value="a_positive">A+</option>
-						<option value="a_negative">A-</option>
-						<option value="b_positive">B+</option>
-						<option value="b_negative">B-</option>
-						<option value="ab_positive">AB+</option>
-						<option value="ab_negative">AB-</option>
-						<option value="o_positive">O+</option>
-						<option value="o_negative">O-</option>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার মোবাইল :</label>
-					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
-					<input type="text" name="secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="someone@someone.com" style="margin-top: 10px;">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district">
-						<option value="">আপনার জেলা পছন্দ করুন</option>
-						<?php
-							foreach($divisions as $divisionName => $divisionDetails) {
-								echo '<optgroup label="'.$divisionName.'">';
-								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
-								}
-								echo '</optgroup>';
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার থানা :</label>
-					<select class="form-control" name="state">
-						<option value="">আপনার থানা পছন্দ করুন</option>
-						<?php
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-								  }
-								echo '</optgroup>';  
-							  }
-
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">ইউনিয়ন/সিটি কর্পোরেশন :</label>
-					<select class="form-control" name="donor_union">
-						<option value="">পছন্দ করুন</option>
-						<?php
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-								 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-									echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-								  }
-								echo '</optgroup>';  
-							  }
-
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওয়ার্ড :</label>
-					<input type="text" name="word" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার ওয়ার্ড">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">জন্ম তারিখ :</label>
-					<select class="form-control dob" name="birth_year">
-						<option value="">বছর</option>
-						<?php
-							for($yr = 0; $yr <= 115; $yr++){
-								if($yr < 10){
-									echo '<option value="190'. $yr .'">190'. $yr .'</option>';
-								}elseif($yr <= 99){
-									echo '<option value="19'. $yr .'">19'. $yr .'</option>';
-								}else{
-									$yrN = substr($yr, 1,2);
-									echo '<option value="20'. $yrN .'">20'. $yrN .'</option>';
-								}
-							}
-						?>
-					</select>
-					<select class="form-control dob" name="birth_month">
-						<option value="">মাস</option>
-						<?php
-							for($mnth = 1; $mnth <= 12; $mnth++){
-								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
-							}
-						?>
-					</select>
-					<select class="form-control dob" name="birth_day">
-						<option value="">দিন</option>
-						<?php
-							for($dy = 1; $dy <= 31; $dy++){
-								echo '<option value="'. $dy .'">'. $dy .'</option>';
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওজন (কেজি) :</label>
-					<input type="text" name="weight" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার ওজন">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">শেষ কবে রক্ত দিয়েছেন :</label>
-					<select class="form-control dob" name="donation_year">
-						<option value="">বছর</option>
-						<?php
-						for($yr = 0; $yr <= 5; $yr++){
-							echo '<option value="201'. $yr .'">201'. $yr .'</option>';
-						}
-						?>
-					</select>
-					<select class="form-control dob" name="donation_month">
-						<option value="">মাস</option>
-						<?php
-							for($mnth = 1; $mnth <= 12; $mnth++){
-								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
-							}
-						?>
-					</select>
-					<select class="form-control dob" name="donation_day">
-						<option value="">দিন</option>
-						<?php
-							for($dy = 1; $dy <= 31; $dy++){
-								echo '<option value="'. $dy .'">'. $dy .'</option>';
-							}
-						?>
-					</select>
-				  </div>
-				  <button type="submit" name="add_donor_list" class="btn btn-info pull-right">তালিকাভূক্ত হোন</button>
-				</form>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/ab_positive.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/ab_negative.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/o_positive.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 sng">
+					<a href=""><img src="img/o_negative.png" alt="" /></a>
+					<p class="text-center"><i class="fa fa-users"></i> Donors : 340</p>
+				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="active_donors">
+				<h3>আমাদের নিয়মিত ডোনার</h3>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>নাম</th>
+							<th>ব্লাড গ্রুপ</th>
+							<th>বয়স</th>
+							<th>জেলা</th>
+							<th>স্ট্যাটাস</th>
+							<th>ইমেইল করুন</th>
+							<th>প্রোফাইল</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							$statement_donor = $db->prepare("SELECT * FROM blood_donor LIMIT 10");
+							$statement_donor->execute();
+							$donors = $statement_donor->fetchAll(PDO::FETCH_ASSOC);
+							$sl = 1;
+							foreach ( $donors as $donor ) {
+							$sl +=1;
+						?>
+						<tr class="<?php if($sl % 2 == 0){echo '';}else{echo 'warning';}?>">
+							<td><?php echo $donor['name'];?></td>
+							<td><?php $st = new BloodGroup(); echo $st->bloodGroupNaming($donor['blood_group']);?></td>
+							<td><?php echo $donor['date_of_birth'];?></td>
+							<td><?php echo $donor['district'];?></td>
+							<td><?php echo $donor['last_donation'];?></td>
+							<td class="text-center"><a href="" class="btn btn-info"><i class="fa fa-envelope"></i> ইমেইল করুন</a></td>
+							<td class="text-center"><a href="" class="btn btn-info"><i class="fa fa-pencil"></i> প্রোফাইল</a></td>
+						</tr>
+						<?php } ?>
+					</tbody>	
+				</table>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="messages">
+				<h3>আপনাদের থেকে প্রাপ্ত মেসেজসমূহ</h3>
+				<?php 
+					/* $sl = 0;
+					$sl +=1;
+					if($sl%2 != 0){ */
+				?>
+				<div class="sng_msg odd clearfix">
+					<div class="user_info col-lg-3 col-md-3 col-sm-3 text-center">
+						<p class="usr"><a href=""><i class="fa fa-user"></i></a></p>
+						<p class="name"><?php echo $donor['name'];?></p>
+					</div>
+					<div class="msgs col-lg-9 col-md-9 col-sm-9">
+						<p class="name"><i class="fa fa-clock-o"></i> <?php echo date('d-m-Y');?></p>
+						<p class="mesg"><?php echo 'Sometimes i wonder asking myself " Is Human Being still the best creation. Yeah there is no doubt that Allah has said the right words. I don\'t possess the right quality to say you thanks brothers. I just want to say what u did and what u r doing for the humanity. In Sha ALLAh you will get the perfect rewards from Allah, the highest. Best luck bro and keep goin';?></p>
+					</div>
+				</div>
+				<?php// }else{ ?>
+				<hr />
+				<div class="sng_msg evn clearfix">
+					<div class="msgs col-lg-9 col-md-9 col-sm-9">
+						<p class="name"><i class="fa fa-clock-o"></i> <?php echo date('d-m-Y');?></p>
+						<p class="mesg"><?php echo 'Sometimes i wonder asking myself " Is Human Being still the best creation. Yeah there is no doubt that Allah has said the right words. I don\'t possess the right quality to say you thanks brothers. I just want to say what u did and what u r doing for the humanity. In Sha ALLAh you will get the perfect rewards from Allah, the highest. Best luck bro and keep goin';?></p>
+					</div>
+					<div class="user_info col-lg-3 col-md-3 col-sm-3 text-center">
+						<p class="usr"><a href=""><i class="fa fa-user"></i></a></p>
+						<p class="name"><?php echo $donor['name'];?></p>
+					</div>
+				</div>
+				<?php// }} ?>
+			</div>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+		</div>	
 	</div>			
 	
 <?php include('footer.php');?>

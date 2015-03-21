@@ -1,20 +1,38 @@
 <?php 
+/* 	set_include_path ('bdaa_php/Areas.php');
+	use \BDAA;
+	$areas = new \BDAA\Areas();
+	$divisions = $areas->getAllDivisions(); */
 	include('header.php');
+	//var_dump($divisions);
 	//include('address-list.php');
 	include('config.php');
-	if(isset($_POST['search_donor'])){
+	//adding blood seeker
+	if( isset($_POST['name']) ){
 		$name = $_POST['name'];
+	}
+	if( isset($_POST['mobile']) ){
 		$mobile = $_POST['mobile'];
+	}
+	if( isset($_POST['seeker_number']) ){
 		$seeker_number = $_POST['seeker_number'];
-		if(isset ( $_POST['donate_blood'] )) {
-			$donate_blood = $_POST['donate_blood'];
-		}
+	}
+	if( isset($_POST['donate_blood']) ){
+		$donate_blood = $_POST['donate_blood'];
+	}
+	if( isset($_POST['division']) ){
+		$division = $_POST['division'];
+	}
+	if( isset($_POST['district']) ){
 		$district = $_POST['district'];
+	}
+	if( isset($_POST['state']) ){
 		$state = $_POST['state'];
-		$seeker_union = $_POST['seeker_union'];
-		$seeker_word = $_POST['seeker_word'];
+	}
+	
+	if(isset($_POST['search_donor'])){
 		$verification_code = mt_rand(100000, 999999);	//send this code to mobile phone
-		if( empty($name) || empty($mobile) || empty($seeker_number) || empty($donate_blood) || empty($district) || empty($state) || empty($seeker_union) || empty($seeker_word) ){
+		if( empty($name) || empty($mobile) || empty($seeker_number) || empty($donate_blood) || empty($division) || empty($district) || empty($state) ){
 			$search_donor_error = "You can not leave any field empty. Please re enter your details.";
 		}else{
 			try{
@@ -22,8 +40,8 @@
 					throw new Exception("Please enter your mobile number correctly.");
 				}
 				
-				$statement = $db->prepare("INSERT INTO blood_seeker VALUES(?,?,?,?,?,?,?,?,?,?)");
-				if( $statement->execute(array('', $name, $mobile, $seeker_number, $donate_blood, $district, $state, $seeker_union, $seeker_word, $verification_code)) ){
+				$statement = $db->prepare("INSERT INTO blood_seeker VALUES(?,?,?,?,?,?,?,?,?)");
+				if( $statement->execute(array('', $name, $mobile, $seeker_number, $donate_blood, $division, $district, $state, $verification_code)) ){
 					$id = $db->lastInsertId();
 					$success_mesg = "Your information submitted successfully.";
 					if( $donate_blood == 'yes' ){
@@ -41,83 +59,69 @@
 		}
 	}
 	
-	
+	//adding donor
+	if( isset($_POST['donor_name']) ){
+		$donor_name = $_POST['donor_name'];
+	}
+	if( isset($_POST['donor_blood_group']) ){
+		$donor_blood_group = $_POST['donor_blood_group'];
+	}
+	if( isset($_POST['donor_mobile']) ){
+		$donor_mobile = $_POST['donor_mobile'];
+	}
+	if( isset($_POST['donor_secondary_mobile']) ){
+		$donor_secondary_mobile = $_POST['donor_secondary_mobile'];
+	}
+	if( isset($_POST['donor_division']) ){
+		$donor_division = $_POST['donor_division'];
+	}
+	if( isset($_POST['donor_district']) ){
+		$donor_district = $_POST['donor_district'];
+	}
+	if( isset($_POST['donor_state']) ){
+		$donor_state = $_POST['donor_state'];
+	}
+	if( isset($_POST['donor_birth_year']) ){
+		$donor_birth_year = $_POST['donor_birth_year'];
+	}
+	if( isset($_POST['donor_birth_month']) ){
+		$donor_birth_month = $_POST['donor_birth_month'];
+	}
+	if( isset($_POST['donor_birth_day']) ){
+		$donor_birth_day = $_POST['donor_birth_day'];
+	}
+	if( isset($_POST['donor_weight']) ){
+		$donor_weight = $_POST['donor_weight'];
+	}
+	if( isset($_POST['donor_last_donation_year']) ){
+		$donor_last_donation_year = $_POST['donor_last_donation_year'];
+	}
+	if( isset($_POST['donor_last_donation_month']) ){
+		$donor_last_donation_month = $_POST['donor_last_donation_month'];
+	}
+	if( isset($_POST['donor_last_donation_day']) ){
+		$donor_last_donation_day = $_POST['donor_last_donation_day'];
+	}
 	if( isset($_POST['add_donor_list']) ){
-		try{
-			if ( empty( $_POST['name'] ) ) {
-				throw new Exception ("Name can be blank.");
-			}
-			if ( empty( $_POST['blood_group'] ) ) {
-				throw new Exception ("Blood group can be blank.");
-			}
-			if ( empty( $_POST['mobile'] ) ) {
-				throw new Exception ("Mobile can be blank.");
-			}
-			if ( empty( $_POST['secondary_mobile'] ) ) {
-				throw new Exception ("Secondary mobile can be blank.");
-			}
-			if ( empty( $_POST['district'] ) ) {
-				throw new Exception ("District can be blank.");
-			}
-			if ( empty( $_POST['state'] ) ) {
-				throw new Exception ("State can be blank.");
-			}
-			if ( empty( $_POST['donor_union'] ) ) {
-				throw new Exception ("Union can be blank.");
-			}
-			if ( empty( $_POST['word'] ) ) {
-				throw new Exception ("Word can be blank.");
-			}
-			if ( empty( $_POST['birth_year'] ) ) {
-				throw new Exception ("Birth year can be blank.");
-			}
-			if ( empty( $_POST['birth_month'] ) ) {
-				throw new Exception ("Birth month can be blank.");
-			}
-			if ( empty( $_POST['birth_day'] ) ) {
-				throw new Exception ("Birth day can be blank.");
-			}
-			if ( empty( $_POST['weight'] ) ) {
-				throw new Exception ("Weight can be blank.");
-			}
-			if ( empty( $_POST['donation_year'] ) ) {
-				throw new Exception ("Donation year can be blank.");
-			}
-			if ( empty( $_POST['donation_month'] ) ) {
-				throw new Exception ("Donation month can be blank.");
-			}
-			if ( empty( $_POST['donation_day'] ) ) {
-				throw new Exception ("Donation day can be blank.");
-			}
-			
-			$name = $_POST['name'];
-			$blood_group = $_POST['blood_group'];
-			$mobile = $_POST['mobile'];
-			$secondary_mobile = $_POST['secondary_mobile'];
-			$district = $_POST['district'];
-			$state = $_POST['state'];
-			$donor_union = $_POST['donor_union'];
-			$word = $_POST['word'];
-			$birthY[] = $_POST['birth_year'];
-			$birthY[] = $_POST['birth_month'];
-			$birthY[] = $_POST['birth_day'];
+		if( empty($donor_name) || empty($donor_blood_group) || empty($donor_mobile) || empty($donor_secondary_mobile) || empty($donor_division) || empty($donor_district) || empty($donor_state) || empty($donor_birth_year) || empty($donor_birth_month) || empty($donor_birth_day) || empty($donor_weight) || empty($donor_last_donation_year) || empty($donor_last_donation_month) || empty($donor_last_donation_day) ){
+			$error_message = "You can not leave any field empty. Please re enter your details.";
+		}else{
+			$birthY[] = $_POST['donor_birth_year'];
+			$birthY[] = $_POST['donor_birth_month'];
+			$birthY[] = $_POST['donor_birth_day'];
 			$dob_donor = implode('-', $birthY);
-			$weight = $_POST['weight'];
-			$don[] = $_POST['donation_year'];
-			$don[] = $_POST['donation_month'];
-			$don[] = $_POST['donation_day'];
+			$don[] = $_POST['donor_last_donation_year'];
+			$don[] = $_POST['donor_last_donation_month'];
+			$don[] = $_POST['donor_last_donation_day'];
 			$last_donation = implode('-', $don);
 			
-			$statement = $db->prepare("INSERT INTO blood_donor VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			if ( $statement->execute(array('',$name,$blood_group,$mobile,$secondary_mobile,$district,$state,$donor_union,$word,$dob_donor,$weight,$last_donation,'no-image.gif')) ) {
+			$statement = $db->prepare("INSERT INTO blood_donor VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+			if ( $statement->execute(array('',$donor_name,$donor_blood_group,$donor_mobile,$donor_secondary_mobile,$donor_division,$donor_district,$donor_state,$dob_donor,$donor_weight,$last_donation,'no-image.gif')) ) {
 				$added_donor = "Added you to donor list successfully.";
 				header('refresh:3;url=index.php');
 			}else{
 				$error_message = "Something went wrong, you did not add to donor list.";
 			}
-		}
-		catch (Exception $e) {
-			$error_message = $e->getMessage();
 		}
 	}
 ?>
@@ -146,20 +150,20 @@
 				<form method="post">
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
-					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" id="name" placeholder="আপনার নাম">
+					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($name)){echo $name;}?>" placeholder="আপনার নাম">
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="yourphone">আপনার মোবাইল :</label>
-					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" id="yourphone" placeholder="আপনার মোবাইল">
+					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($mobile)){echo $mobile;}?>" placeholder="আপনার মোবাইল">
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার ডোনার নম্বর (যদি থাকে) :</label>
-					<input type="text" name="seeker_number" class="col-lg-6 col-md-6 col-sm-6 form-control" id="donornumber" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
+					<input type="text" name="seeker_number" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($seeker_number)){echo $seeker_number;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donatefuture">ভবিষ্যতে আপনিও অন্যের দরকারে রক্ত দিতে চান :</label>
-						<input type="radio" name="donate_blood" id="donatefuture" value="yes"> হ্যাঁ
-						<input type="radio" name="donate_blood" id="donatefuture" value="no"> না
+						<input type="radio" name="donate_blood" id="donatefuture" value="yes" <?php if(isset($donate_blood)&&($donate_blood == 'yes')){echo 'checked';}?>> হ্যাঁ
+						<input type="radio" name="donate_blood" id="donatefuture" value="no" <?php if(isset($donate_blood)&&($donate_blood == 'no')){echo 'checked';}?>> না
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
@@ -206,13 +210,13 @@
 					if ( isset ( $dist ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="thana">আপনার থানা :</label>
-					<select class="form-control" name="thana" onchange="this.form.submit()">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="state">আপনার থানা :</label>
+					<select class="form-control" name="state" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['thana'] ) ) {
-								$thana =  $_POST['thana'];
-								echo '<option selected value="'.$thana.'">'.$thana.'</option>';
+							if ( isset ( $_POST['state'] ) ) {
+								$state =  $_POST['state'];
+								echo '<option selected value="'.$state.'">'.$state.'</option>';
 							}
 							foreach($divisions as $divisionName => $divisionDetails) {
 							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
@@ -255,12 +259,15 @@
 				<?php } ?>
 				<form method="post" action="">
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
-					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার নাম">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_name">আপনার নাম :</label>
+					<input type="text" name="donor_name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_name)){echo $donor_name;}?>" placeholder="আপনার নাম">
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার রক্তের গ্রুপ :</label>
-					<select class="form-control" name="blood_group">
+					<select class="form-control" name="donor_blood_group">
+						<?php if(isset($donor_blood_group)){
+							echo '<option value="'. $donor_blood_group .'" selected>'. $donor_blood_group .'</option>';
+						} ?>
 						<option value="">পছন্দ করুন</option>
 						<option value="a_positive">A+</option>
 						<option value="a_negative">A-</option>
@@ -273,15 +280,15 @@
 					</select>
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার মোবাইল :</label>
-					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_mobile">আপনার মোবাইল :</label>
+					<input type="text" name="donor_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_mobile)){echo $donor_mobile;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
-					<input type="text" name="secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="someone@someone.com" style="margin-top: 10px;">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_secondary_mobile">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
+					<input type="text" name="donor_secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_secondary_mobile)){echo $donor_secondary_mobile;}?>" placeholder="someone@someone.com" style="margin-top: 10px;">
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_division">আপনার বিভাগ :</label>
 					<select class="form-control" name="donor_division" onchange="this.form.submit()">
 						<option value="">আপনার বিভাগ পছন্দ করুন</option>
 						<?php
@@ -299,7 +306,7 @@
 					if ( isset ( $donor_div ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_district">আপনার জেলা :</label>
 					<select class="form-control" name="donor_district" onchange="this.form.submit()">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
@@ -324,13 +331,13 @@
 					if ( isset ( $donor_dist ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="thana">আপনার থানা :</label>
-					<select class="form-control" name="donor_thana" onchange="this.form.submit()">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_state">আপনার থানা :</label>
+					<select class="form-control" name="donor_state" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['donor_thana'] ) ) {
-								$donor_thana =  $_POST['donor_thana'];
-								echo '<option selected value="'.$donor_thana.'">'.$donor_thana.'</option>';
+							if ( isset ( $_POST['donor_state'] ) ) {
+								$donor_state =  $_POST['donor_state'];
+								echo '<option selected value="'.$donor_state.'">'.$donor_state.'</option>';
 							}
 							foreach($divisions as $divisionName => $divisionDetails) {
 							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
@@ -349,8 +356,11 @@
 				  </div>
 				  <?php } ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">জন্ম তারিখ :</label>
-					<select class="form-control dob" name="birth_year">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_birth_year">জন্ম তারিখ :</label>
+					<select class="form-control dob" name="donor_birth_year">
+						<?php if(isset($donor_birth_year) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_birth_year .'" selected>'. $donor_birth_year .'</option>';
+						} ?>
 						<option value="">বছর</option>
 						<?php
 							for($yr = 0; $yr <= 115; $yr++){
@@ -365,7 +375,10 @@
 							}
 						?>
 					</select>
-					<select class="form-control dob" name="birth_month">
+					<select class="form-control dob" name="donor_birth_month">
+						<?php if(isset($donor_birth_month) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_birth_month .'" selected>'. $donor_birth_month .'</option>';
+						} ?>
 						<option value="">মাস</option>
 						<?php
 							for($mnth = 1; $mnth <= 12; $mnth++){
@@ -373,7 +386,10 @@
 							}
 						?>
 					</select>
-					<select class="form-control dob" name="birth_day">
+					<select class="form-control dob" name="donor_birth_day">
+						<?php if(isset($donor_birth_day) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_birth_day .'" selected>'. $donor_birth_day .'</option>';
+						} ?>
 						<option value="">দিন</option>
 						<?php
 							for($dy = 1; $dy <= 31; $dy++){
@@ -383,12 +399,15 @@
 					</select>
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওজন (কেজি) :</label>
-					<input type="text" name="weight" class="col-lg-6 col-md-6 col-sm-6 form-control" placeholder="আপনার ওজন">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_weight">আপনার ওজন (কেজি) :</label>
+					<input type="text" name="donor_weight" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_weight)){echo $donor_weight;}?>" placeholder="আপনার ওজন">
 				  </div>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">শেষ কবে রক্ত দিয়েছেন :</label>
-					<select class="form-control dob" name="donation_year">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_last_donation_year">শেষ কবে রক্ত দিয়েছেন :</label>
+					<select class="form-control dob" name="donor_last_donation_year">
+						<?php if(isset($donor_last_donation_year) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_last_donation_year .'" selected>'. $donor_last_donation_year .'</option>';
+						} ?>
 						<option value="">বছর</option>
 						<?php
 						for($yr = 0; $yr <= 5; $yr++){
@@ -396,7 +415,10 @@
 						}
 						?>
 					</select>
-					<select class="form-control dob" name="donation_month">
+					<select class="form-control dob" name="donor_last_donation_month">
+						<?php if(isset($donor_last_donation_month) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_last_donation_month .'" selected>'. $donor_last_donation_month .'</option>';
+						} ?>
 						<option value="">মাস</option>
 						<?php
 							for($mnth = 1; $mnth <= 12; $mnth++){
@@ -404,7 +426,10 @@
 							}
 						?>
 					</select>
-					<select class="form-control dob" name="donation_day">
+					<select class="form-control dob" name="donor_last_donation_day">
+						<?php if(isset($donor_last_donation_day) && ($donor_birth_year != '')){
+							echo '<option value="'. $donor_last_donation_day .'" selected>'. $donor_last_donation_day .'</option>';
+						} ?>
 						<option value="">দিন</option>
 						<?php
 							for($dy = 1; $dy <= 31; $dy++){

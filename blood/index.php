@@ -1,5 +1,5 @@
 <?php 
-	include_once (realpath (dirname(__FILE__) . '/bangladesh-administrative-areas/bdaa_php/Areas.php'));
+	include_once (realpath (dirname(__FILE__) . '/../../bangladesh-administrative-areas/bdaa_php/Areas.php'));
 	use \BDAA\Areas;
 	$areas = new \BDAA\Areas();
 	$divisions = $areas->getAllDivisions();

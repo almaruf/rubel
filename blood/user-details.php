@@ -52,10 +52,9 @@
 						আপনার রক্তের গ্রুপ : <?php $st = new BloodGroup(); echo $st->bloodGroupNaming($user_info['blood_group']);?><br />
 						আপনার মোবাইল নম্বর : <?php echo $user_info['mobile'];?><br />
 						দ্বিতীয় মোবাইল নম্বর/ইমেইল এড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) : <?php echo $user_info['secondary_mobile'];?><br />
-						জেলা : <?php echo ucfirst($user_info['district']);?><br />
-						থানা : <?php echo ucfirst($user_info['state']);?><br />
-						ইউনিয়ন/সিটি কর্পোরেশন : <?php echo ucfirst($user_info['donor_union']);?><br />
-						ওয়ার্ড : <?php echo $user_info['word'];?><br />
+						বিভাগ : <?php echo $user_info['division'];?><br />
+						জেলা : <?php echo $user_info['district'];?><br />
+						উপজেলা : <?php echo $user_info['state'];?><br />
 						জন্ম তারিখ : <?php echo $user_info['date_of_birth'];?><br />
 						ওজন : <?php echo $user_info['weight'];?><br />  
 						শেষ রক্ত দিয়েছেন : <?php echo $user_info['last_donation'];?><br /><br />

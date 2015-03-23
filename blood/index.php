@@ -1,11 +1,9 @@
 <?php 
-/* 	set_include_path ('bdaa_php/Areas.php');
-	use \BDAA;
+	include_once (realpath (dirname(__FILE__) . '/bangladesh-administrative-areas/bdaa_php/Areas.php'));
+	use \BDAA\Areas;
 	$areas = new \BDAA\Areas();
-	$divisions = $areas->getAllDivisions(); */
+	$divisions = $areas->getAllDivisions();
 	include('header.php');
-	//var_dump($divisions);
-	//include('address-list.php');
 	include('config.php');
 	//adding blood seeker
 	if( isset($_POST['name']) ){
@@ -26,13 +24,13 @@
 	if( isset($_POST['district']) ){
 		$district = $_POST['district'];
 	}
-	if( isset($_POST['state']) ){
-		$state = $_POST['state'];
+	if( isset($_POST['upazila']) ){
+		$upazila = $_POST['upazila'];
 	}
 	
 	if(isset($_POST['search_donor'])){
 		$verification_code = mt_rand(100000, 999999);	//send this code to mobile phone
-		if( empty($name) || empty($mobile) || empty($seeker_number) || empty($donate_blood) || empty($division) || empty($district) || empty($state) ){
+		if( empty($name) || empty($mobile) || empty($seeker_number) || empty($donate_blood) || empty($division) || empty($district) || empty($upazila) ){
 			$search_donor_error = "You can not leave any field empty. Please re enter your details.";
 		}else{
 			try{
@@ -41,7 +39,7 @@
 				}
 				
 				$statement = $db->prepare("INSERT INTO blood_seeker VALUES(?,?,?,?,?,?,?,?,?)");
-				if( $statement->execute(array('', $name, $mobile, $seeker_number, $donate_blood, $division, $district, $state, $verification_code)) ){
+				if( $statement->execute(array('', $name, $mobile, $seeker_number, $donate_blood, $division, $district, $upazila, $verification_code)) ){
 					$id = $db->lastInsertId();
 					$success_mesg = "Your information submitted successfully.";
 					if( $donate_blood == 'yes' ){
@@ -78,8 +76,8 @@
 	if( isset($_POST['donor_district']) ){
 		$donor_district = $_POST['donor_district'];
 	}
-	if( isset($_POST['donor_state']) ){
-		$donor_state = $_POST['donor_state'];
+	if( isset($_POST['donor_upazila']) ){
+		$donor_upazila = $_POST['donor_upazila'];
 	}
 	if( isset($_POST['donor_birth_year']) ){
 		$donor_birth_year = $_POST['donor_birth_year'];
@@ -103,7 +101,7 @@
 		$donor_last_donation_day = $_POST['donor_last_donation_day'];
 	}
 	if( isset($_POST['add_donor_list']) ){
-		if( empty($donor_name) || empty($donor_blood_group) || empty($donor_mobile) || empty($donor_secondary_mobile) || empty($donor_division) || empty($donor_district) || empty($donor_state) || empty($donor_birth_year) || empty($donor_birth_month) || empty($donor_birth_day) || empty($donor_weight) || empty($donor_last_donation_year) || empty($donor_last_donation_month) || empty($donor_last_donation_day) ){
+		if( empty($donor_name) || empty($donor_blood_group) || empty($donor_mobile) || empty($donor_secondary_mobile) || empty($donor_division) || empty($donor_district) || empty($donor_upazila) || empty($donor_birth_year) || empty($donor_birth_month) || empty($donor_birth_day) || empty($donor_weight) || empty($donor_last_donation_year) || empty($donor_last_donation_month) || empty($donor_last_donation_day) ){
 			$error_message = "You can not leave any field empty. Please re enter your details.";
 		}else{
 			$birthY[] = $_POST['donor_birth_year'];
@@ -116,7 +114,7 @@
 			$last_donation = implode('-', $don);
 			
 			$statement = $db->prepare("INSERT INTO blood_donor VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-			if ( $statement->execute(array('',$donor_name,$donor_blood_group,$donor_mobile,$donor_secondary_mobile,$donor_division,$donor_district,$donor_state,$dob_donor,$donor_weight,$last_donation,'no-image.gif')) ) {
+			if ( $statement->execute(array('',$donor_name,$donor_blood_group,$donor_mobile,$donor_secondary_mobile,$donor_division,$donor_district,$donor_upazila,$dob_donor,$donor_weight,$last_donation,'no-image.gif')) ) {
 				$added_donor = "Added you to donor list successfully.";
 				header('refresh:3;url=index.php');
 			}else{
@@ -170,65 +168,52 @@
 					<select class="form-control" name="division" onchange="this.form.submit()">
 						<option value="">আপনার বিভাগ পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['division'] ) ) {
-								$div =  $_POST['division'];
-								echo '<option selected value="'.$div.'">'.$div.'</option>';
-							}
-							$divisions = include_once('address-list.php');
-							foreach($divisions as $divisionName => $divisionDetails) {
-								echo '<option value="'.$divisionName.'">'.$divisionDetails['name_bn'].'</option>';
+							foreach($divisions as $division) {
+								$tmpr = null;
+								if ( isset ( $_POST['division'] ) && ( $division->getName() == $_POST['division'] )) {
+									$tmpr = 'selected';
+									$selected_division = $division;
+								}
+								echo '<option value="'.$division->getName().'"  '. $tmpr .'>'.$division->getNameBn().'</option>'; 
 							}
 						?>
 					</select>
+					
 				  </div>
 				  <?php
-					if ( isset ( $div ) ) {
+					if ( isset ( $selected_division ) ) {
 				  ?>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
 					<select class="form-control" name="district" onchange="this.form.submit()">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['district'] ) ) {
-								$dist =  $_POST['district'];
-								echo '<option selected value="'.$dist.'">'.$dist.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  if ($divisionName == $div) {
-							  echo '<optgroup label="'.$div.'">';
-								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
-								}	
-								echo '</optgroup>';	
+							foreach($selected_division->getDistricts() as $district) {
+								$tmpr = null;
+								if ( isset ( $_POST['district'] ) && ($_POST['district'] == $district->getName())) {
+									$tmpr = 'selected';
+									$selected_district = $district;
 								}
-							}  
+								echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
+							}
 						?>
 					</select>
 				  </div>
 				  <?php
 					}
-					if ( isset ( $dist ) ) {
+					if ( isset ( $selected_district ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="state">আপনার থানা :</label>
-					<select class="form-control" name="state" onchange="this.form.submit()">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="upazila">আপনার থানা :</label>
+					<select class="form-control" name="upazila" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['state'] ) ) {
-								$state =  $_POST['state'];
-								echo '<option selected value="'.$state.'">'.$state.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								 if ($districtName == $dist) {
-									echo '<optgroup label="'.$dist.'">';
-									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-									  }
-									echo '</optgroup>';  
+							foreach ( $selected_district->getUpazilas() as $upozila ) {
+								$tmpr = null;
+								if ( ( isset ($_POST['upazila']) ) && ($upozila->getName() == $_POST['upazila']) ) {
+									$tmpr = 'selected';
 								}
-							  }
-
+								echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
 							}
 						?> 
 					</select>
@@ -287,69 +272,57 @@
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_secondary_mobile">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
 					<input type="text" name="donor_secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_secondary_mobile)){echo $donor_secondary_mobile;}?>" placeholder="someone@someone.com" style="margin-top: 10px;">
 				  </div>
-				  <div class="form-group clearfix">
+				   <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_division">আপনার বিভাগ :</label>
 					<select class="form-control" name="donor_division" onchange="this.form.submit()">
 						<option value="">আপনার বিভাগ পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['donor_division'] ) ) {
-								$donor_div =  $_POST['donor_division'];
-								echo '<option selected value="'.$donor_div.'">'.$donor_div.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-								echo '<option value="'.$divisionName.'">'.$divisionDetails['name_bn'].'</option>';
+							foreach($divisions as $division) {
+								$donor_tmpr = null;
+								if ( isset ( $_POST['donor_division'] ) && ( $division->getName() == $_POST['donor_division'] )) {
+									$donor_tmpr = 'selected';
+									$donor_selected_division = $division;
+								}
+								echo '<option value="'.$division->getName().'"  '. $donor_tmpr .'>'.$division->getNameBn().'</option>'; 
 							}
 						?>
 					</select>
+					
 				  </div>
 				  <?php
-					if ( isset ( $donor_div ) ) {
+					if ( isset ( $donor_selected_division ) ) {
 				  ?>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_district">আপনার জেলা :</label>
 					<select class="form-control" name="donor_district" onchange="this.form.submit()">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['donor_district'] ) ) {
-								$donor_dist =  $_POST['donor_district'];
-								echo '<option selected value="'.$donor_dist.'">'.$donor_dist.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  if ($divisionName == $donor_div) {
-							  echo '<optgroup label="'.$donor_div.'">';
-								foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
-								}	
-								echo '</optgroup>';	
+							foreach($donor_selected_division->getDistricts() as $district) {
+								$tmpr = null;
+								if ( isset ( $_POST['donor_district'] ) && ($_POST['donor_district'] == $district->getName())) {
+									$tmpr = 'selected';
+									$donor_selected_district = $district;
 								}
-							}  
+								echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
+							}
 						?>
 					</select>
 				  </div>
 				  <?php
 					}
-					if ( isset ( $donor_dist ) ) {
+					if ( isset ( $donor_selected_district ) ) {
 				  ?>
 				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_state">আপনার থানা :</label>
-					<select class="form-control" name="donor_state" onchange="this.form.submit()">
+					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_upazila">আপনার থানা :</label>
+					<select class="form-control" name="donor_upazila" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
-							if ( isset ( $_POST['donor_state'] ) ) {
-								$donor_state =  $_POST['donor_state'];
-								echo '<option selected value="'.$donor_state.'">'.$donor_state.'</option>';
-							}
-							foreach($divisions as $divisionName => $divisionDetails) {
-							  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-								 if ($districtName == $donor_dist) {
-									echo '<optgroup label="'.$donor_dist.'">';
-									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-									  }
-									echo '</optgroup>';  
+							foreach ( $donor_selected_district->getUpazilas() as $upozila ) {
+								$tmpr = null;
+								if ( ( isset ($_POST['donor_upazila']) ) && ($upozila->getName() == $_POST['donor_upazila']) ) {
+									$tmpr = 'selected';
 								}
-							  }
-
+								echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
 							}
 						?> 
 					</select>

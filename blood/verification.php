@@ -39,15 +39,14 @@
 					$name = $donorInfo['name'];
 					$mobile = $donorInfo['mobile'];
 					$donor_num = $donorInfo['donor_num'];
+					$division = $donorInfo['division'];
 					$district = $donorInfo['district'];
 					$state = $donorInfo['state'];
-					$seeker_union = $donorInfo['seeker_union'];
-					$word = $donorInfo['word'];
-					$insertDonor = $db->prepare("INSERT INTO blood_donor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
-					if ( $insertDonor->execute(array('', $name, $blood_group, $mobile, $donor_num, $district, $state, $seeker_union, $word, $donor_date_of_birth, $weight, $last_donation,'no-image.gif')) ) {
+					$insertDonor = $db->prepare("INSERT INTO blood_donor VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+					if ( $insertDonor->execute(array('', $name, $blood_group, $mobile, $donor_num, $division, $district, $state, $donor_date_of_birth, $weight, $last_donation,'no-image.gif')) ) {
 						$current_id = $db->lastInsertId();
 						$success_mesg = "Your information submitted successfully to our donor list.";
-						header('location: user-details.php?id='.$current_id);
+						header('refresh:3;url=user-details.php?id='.$current_id);
 					}else{
 						throw new Exception("Something went wrong.");
 					}
@@ -69,17 +68,16 @@
 			if ( empty ( $ver_code ) ) {
 				throw new Exception('Please put your verification code here.');
 			}
-			$statement = $db->prepare("SELECT district,state,seeker_union,word,verification_code FROM blood_seeker WHERE id=? && verification_code=?");
+			$statement = $db->prepare("SELECT division,district,state,verification_code FROM blood_seeker WHERE id=? && verification_code=?");
 			$statement->execute(array($id,$ver_code));
 			$matchs = $statement->rowCount();
 			if ( $matchs != 0 ) {
 				$success_mesg = 'Valid code.';
 				$seeker_info = $statement->fetch(PDO::FETCH_ASSOC);
+				$division = $seeker_info['division'];
 				$seeker_dis = $seeker_info['district'];
 				$seeker_state = $seeker_info['state'];
-				$seeker_union = $seeker_info['seeker_union'];
-				$word = $seeker_info['word'];
-				header('refresh:3;url=donor-list-address-wise.php?district='. $seeker_dis .'&state='. $seeker_state .'&union='. $seeker_union.'&word='.$word);
+				header('refresh:3;url=donor-list-address-wise.php?division='.$division.'&district='. $seeker_dis .'&state='. $seeker_state);
 			}else{
 				throw new Exception('Wrong code!');
 			}
@@ -90,7 +88,7 @@
 	}
 ?>
 	<div class="container">
-		<div class="row <?php echo date("Y-m-d");?>">
+		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 wanted">
 				<?php
 					if(isset($search_donor_error)){

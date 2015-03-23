@@ -12,10 +12,6 @@
 		$blood_group = $_POST['blood_group'];
 		$mobile = $_POST['mobile'];
 		$secondary_mobile = $_POST['secondary_mobile'];
-		$district = $_POST['district'];
-		$state = $_POST['state'];
-		$donor_union = $_POST['seeker_union'];
-		$word = $_POST['word'];
 		$birth_year = $_POST['birth_year'];
 		$birth_month = $_POST['birth_month'];
 		$birth_day = $_POST['birth_day'];
@@ -32,9 +28,9 @@
 		$lstdon[] = $donation_day;
 		$last_donation = implode('-',$lstdon);
 		  	 	 	 	 	 	 	 	 	 	 
-		$updateDonor = $db->prepare("UPDATE blood_donor SET name=?, blood_group=?, mobile=?, secondary_mobile=?, district=?, state=?, donor_union=?, word=?, date_of_birth=?, weight=?, last_donation=? WHERE id=?");
+		$updateDonor = $db->prepare("UPDATE blood_donor SET name=?, blood_group=?, mobile=?, secondary_mobile=?, date_of_birth=?, weight=?, last_donation=? WHERE id=?");
 		try{
-			if ( $updateDonor->execute(array($name, $blood_group, $mobile, $secondary_mobile, $district, $state, $donor_union, $word, $date_of_birth, $weight, $last_donation, $id)) ) {
+			if ( $updateDonor->execute(array($name, $blood_group, $mobile, $secondary_mobile, $date_of_birth, $weight, $last_donation, $id)) ) {
 				$success_mesg = "Your information submitted successfully to our donor list.";
 				header('location: user-details.php?id='.$id);
 			}else{
@@ -86,43 +82,6 @@
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
 					<input type="text" name="secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php echo $donor['secondary_mobile'];?>" placeholder="someone@someone.com" style="margin-top: 10px;">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district">
-						<option value="<?php echo $donor['district'];?>" selected><?php echo $donor['district'];?></option>
-						<option value="">আপনার জেলা পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার থানা :</label>
-					<select class="form-control" name="state">
-						<option value="<?php echo $donor['state'];?>" selected><?php echo $donor['state'];?></option>
-						<option value="">আপনার থানা পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">ইউনিয়ন/সিটি কর্পোরেশন :</label>
-					<select class="form-control" name="seeker_union">
-						<option value="<?php echo $donor['donor_union'];?>" selected><?php echo $donor['donor_union'];?></option>
-						<option value="">পছন্দ করুন</option>
-						<option value="dhaka">ঢাকা</option>
-						<option value="sylhet">সিলেট</option>
-						<option value="rongpur">রংপুর</option>
-						<option value="bogura">বগুড়া</option>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="word">আপনার ওয়ার্ড :</label>
-					<input type="text" name="word" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php echo $donor['word'];?>" placeholder="আপনার ওয়ার্ড">
 				  </div>
 				  <div class="form-group clearfix">
 					<label class="col-lg-6 col-md-6 col-sm-6" for="district">জন্ম তারিখ :</label>

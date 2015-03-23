@@ -45,10 +45,9 @@
 						<tr>
 							<th>ব্লাড গ্রুপ</th>
 							<th>নাম</th>
+							<th>ডিভিশন</th>
 							<th>জেলা</th>
 							<th>থানা</th>
-							<th>ইউনিয়ন/সিটি কর্পোরেশন</th>
-							<th>ওয়ার্ড</th>
 							<th>অপারেশান</th>
 						</tr>
 					</thead>
@@ -61,10 +60,9 @@
 						<tr class="<?php if($sl % 2 == 0){echo '';}else{echo 'warning';}?>">
 							<td><?php $st = new BloodGroup(); echo $st->bloodGroupNaming($donor['blood_group']);?></td>
 							<td><?php echo $donor['name'];?></td>
+							<td><?php echo $donor['division'];?></td>
 							<td><?php echo $donor['district'];?></td>
 							<td><?php echo $donor['state'];?></td>
-							<td><?php echo $donor['donor_union'];?></td>
-							<td><?php echo $donor['word'];?></td>
 							<td class="text-center"><a href="" class="btn btn-info"><i class="fa fa-pencil"></i> এডিট</a></td>
 						</tr>
 						<?php } ?>

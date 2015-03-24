@@ -1,4 +1,8 @@
 <?php 
+	include_once (realpath (dirname(__FILE__) . '/../../../bangladesh-administrative-areas/bdaa_php/Areas.php'));
+	use \BDAA\Areas;
+	$areas = new \BDAA\Areas();
+	$divisions = $areas->getAllDivisions();
 	include('header.php');
 	include('../classes/Donor.php');
 	include('config.php');
@@ -8,6 +12,18 @@
 	$statement = $db->prepare("SELECT * FROM blood_donor ORDER BY id DESC LIMIT 10");
 	$statement->execute();
 	$donors = $statement->fetchAll(PDO::FETCH_ASSOC);
+	if(isset($_POST['name']) && !empty($_POST['name'])){
+		$name = $_POST['name'];
+	}
+	if(isset($_POST['division']) && !empty($_POST['division'])){
+		$division = $_POST['division'];
+	}
+	if(isset($_POST['district']) && !empty($_POST['district'])){
+		$district = $_POST['district'];
+	}
+	if(isset($_POST['upazila']) && !empty($_POST['upazila'])){
+		$upazila = $_POST['upazila'];
+	}
 ?>
 	<div class="container">
 		<div class="row">
@@ -54,18 +70,41 @@
 					<tbody>
 						<?php
 							$sl = 1;
+							if( !isset($_POST['find_donor']) ) {
 							foreach ( $donors as $donor ) {
 							$sl +=1;
 						?>
 						<tr class="<?php if($sl % 2 == 0){echo '';}else{echo 'warning';}?>">
 							<td><?php $st = new BloodGroup(); echo $st->bloodGroupNaming($donor['blood_group']);?></td>
-							<td><?php echo $donor['name'];?></td>
+							<td><a href="donor-details.php?id=<?php echo $donor['id'];?>"><?php echo $donor['name'];?></a></td>
 							<td><?php echo $donor['division'];?></td>
 							<td><?php echo $donor['district'];?></td>
 							<td><?php echo $donor['state'];?></td>
 							<td class="text-center"><a href="" class="btn btn-info"><i class="fa fa-pencil"></i> এডিট</a></td>
 						</tr>
-						<?php } ?>
+						<?php }
+							}else{
+							$find_donor = $db->prepare("SELECT * FROM blood_donor WHERE name=? && division=? && district=? && state=?");
+							$find_donor->execute(array($name,$division,$district,$upazila));
+							$matchs = $find_donor->rowCount();
+							if ( $matchs != 0 ) {
+							$blood_donors = $find_donor->fetchAll(PDO::FETCH_ASSOC);
+							foreach ( $blood_donors as $blood_donor ) {
+						?>
+						<tr>
+							<td><?php echo $blood_donor['id'];?></td>
+							<td><?php echo $blood_donor['name'];?></td>
+							<td><?php echo $blood_donor['division'];?></td>
+							<td><?php echo $blood_donor['district'];?></td>
+							<td><?php echo $blood_donor['state'];?></td>
+							<td><?php $st = new BloodGroup(); echo $st->bloodGroupNaming($blood_donor['blood_group']);?></td>
+							<td class="text-center"><a href="" class="btn btn-info">কলব্যাক করুন</a></td>
+						</tr>
+						<?php } }else{ ?>
+						<tr>
+							<td colspan="8"><h3 class="text-center">Sorry! No donor found in your location.</h3></td>
+						</tr>
+						<?php } } ?>
 					</tbody>	
 				  </table>
 				  <br />
@@ -91,64 +130,64 @@
 					<form method="post">
 					  <div class="form-group clearfix">
 						<label class="col-lg-3 col-md-3 col-sm-3 nopadding" for="name">নাম :</label>
-						<input type="text" name="name" class="col-lg-3 col-md-3 col-sm-3 form-control" id="name" placeholder="নাম">
+						<input type="text" name="name" class="col-lg-3 col-md-3 col-sm-3 form-control" value="<?php if(isset($name)){echo $name;}?>" placeholder="নাম">
 					  </div>
 					  <div class="form-group clearfix">
-						<label class="col-lg-6 col-md-6 col-sm-6 nopadding" for="district">জেলা :</label>
-						<select class="form-control" name="district">
-							<option value="">জেলা পছন্দ করুন</option>
+						<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
+						<select class="form-control" name="division" onchange="this.form.submit()">
+							<option value="">আপনার বিভাগ পছন্দ করুন</option>
 							<?php
-								$divisions = include_once('../address-list.php');
-								foreach($divisions as $divisionName => $divisionDetails) {
-									echo '<optgroup label="'.$divisionDetails['name_bn'].'">';
-									foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-										echo '<option value="'.$districtName.'">'.$districtDetails['name_bn'].'</option>';
+								foreach($divisions as $division) {
+									$tmpr = null;
+									if ( isset ( $_POST['division'] ) && ( $division->getName() == $_POST['division'] )) {
+										$tmpr = 'selected';
+										$selected_division = $division;
 									}
-									echo '</optgroup>';
+									echo '<option value="'.$division->getName().'"  '. $tmpr .'>'.$division->getNameBn().'</option>'; 
 								}
 							?>
 						</select>
+						
 					  </div>
+					  <?php
+						if ( isset ( $selected_division ) ) {
+					  ?>
 					  <div class="form-group clearfix">
-						<label class="col-lg-6 col-md-6 col-sm-6 nopadding" for="district">থানা :</label>
-						<select class="form-control" name="state">
-							<option value="">থানা পছন্দ করুন</option>
+						<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
+						<select class="form-control" name="district" onchange="this.form.submit()">
+							<option value="">আপনার জেলা পছন্দ করুন</option>
 							<?php
-								foreach($divisions as $divisionName => $divisionDetails) {
-								  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-									  }
-									echo '</optgroup>';  
-								  }
-
+								foreach($selected_division->getDistricts() as $district) {
+									$tmpr = null;
+									if ( isset ( $_POST['district'] ) && ($_POST['district'] == $district->getName())) {
+										$tmpr = 'selected';
+										$selected_district = $district;
+									}
+									echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
 								}
 							?>
 						</select>
 					  </div>
+					  <?php
+						}
+						if ( isset ( $selected_district ) ) {
+					  ?>
 					  <div class="form-group clearfix">
-						<label class="col-lg-6 col-md-6 col-sm-6 nopadding" for="district">ইউনিয়ন/সিটি কর্পোরেশন :</label>
-						<select class="form-control" name="donor_union">
-							<option value="">পছন্দ করুন</option>
+						<label class="col-lg-6 col-md-6 col-sm-6" for="upazila">আপনার থানা :</label>
+						<select class="form-control" name="upazila" onchange="this.form.submit()">
+							<option value="">আপনার থানা পছন্দ করুন</option>
 							<?php
-								foreach($divisions as $divisionName => $divisionDetails) {
-								  foreach($divisionDetails['districts'] as $districtName => $districtDetails) {
-									echo '<optgroup label="'.$districtDetails['name_bn'].'">';
-									 foreach($districtDetails['thanas'] as $thanaName => $thanaDetails) {
-										echo '<option value="'.$thanaName.'">'.$thanaDetails['name_bn'].'</option>';
-									  }
-									echo '</optgroup>';  
-								  }
-
+								foreach ( $selected_district->getUpazilas() as $upozila ) {
+									$tmpr = null;
+									if ( ( isset ($_POST['upazila']) ) && ($upozila->getName() == $_POST['upazila']) ) {
+										$tmpr = 'selected';
+									}
+									echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
 								}
-							?>
+							?> 
 						</select>
 					  </div>
-					  <div class="form-group clearfix">
-						<label class="col-lg-6 col-md-6 col-sm-6 nopadding" for="seeker_word">ওয়ার্ড :</label>
-						<input type="text" name="seeker_word" class="col-lg-6 col-md-6 col-sm-6 form-control" id="word" placeholder="ওয়ার্ড">
-					  </div>
+					  <?php } ?>
 					  <div class="clearfix" style="margin-bottom:8px"></div>
 					  <button type="submit" name="find_donor" class="btn btn-info">Find Donor</button>
 					</form>

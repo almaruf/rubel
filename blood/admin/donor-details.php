@@ -48,10 +48,9 @@
 					<p class="users_info">
 						আপনার রক্তের গ্রুপ : <?php $st = new BloodGroup(); echo $st->bloodGroupNaming($user_info['blood_group']);?><br />
 						মোবাইল নম্বর : <?php echo $user_info['mobile'];?><br />
+						বিভাগ : <?php echo ucfirst($user_info['division']);?><br />
 						জেলা : <?php echo ucfirst($user_info['district']);?><br />
 						থানা : <?php echo ucfirst($user_info['state']);?><br />
-						ইউনিয়ন/সিটি কর্পোরেশন : <?php echo ucfirst($user_info['donor_union']);?><br />
-						ওয়ার্ড : <?php echo $user_info['word'];?><br />
 					</p>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 user_photo">

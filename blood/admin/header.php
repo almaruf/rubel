@@ -1,6 +1,6 @@
 <?php
 ob_start();
-session_start();
+@session_start();
 $file_name = basename($_SERVER['PHP_SELF']);
 $main_file_num = strripos($file_name,'.');
 $main_file_name = substr($file_name,0,$main_file_num);

@@ -9,6 +9,28 @@
 	$statement->execute();
 	$donors = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
+	
+	/* 
+  $con = mysql_connect($dbserver,$dbuser,$dbpass);
+  if (!$con){ die('Could not connect: ' . mysql_error()); }
+  mysql_select_db($dbname, $con);
+  $result = mysql_query($sql_query);
+
+  echo "{ \"cols\": [ {\"id\":\"\",\"label\":\"Nickname\",\"pattern\":\"\",\"type\":\"number\"}, {\"id\":\"\",\"label\":\"Name\",\"pattern\":\"\",\"type\":\"number\"}, {\"id\":\"\",\"label\":\"Label\",\"pattern\":\"\",\"type\":\"number\"}, {\"id\":\"\",\"label\":\"Hover\",\"pattern\":\"\",\"type\":\"number\"}, {\"id\":\"\",\"label\":\"PointSum\",\"pattern\":\"\",\"type\":\"number\"} ], \"rows\": [ ";
+
+  $total_rows = mysql_num_rows($result);
+  while($row = mysql_fetch_array($result)){
+    echo "{\"c\":[{\"v\":\"" . $row['nickname'] . "\",\"f\":null},{\"v\":\"" . $row['name'] . "\",\"f\":null},{\"v\":\"" . $row['label'] . "\",\"f\":null},{\"v\":\"" . $row['hover'] . "\",\"f\":null},{\"v\":\"" . $row['pointsum'] . "\",\"f\":null}]}, ";
+  }
+
+  $result = mysql_query($sql_query2);
+  while($row = mysql_fetch_array($result)){
+    echo "{\"c\":[{\"v\":\"" . $row['nickname'] . "\",\"f\":null},{\"v\":\"" . "\",\"f\":null},{\"v\":\"" . "\",\"f\":null},{\"v\":\" Total \",\"f\":null},{\"v\":\"" . $row['total'] . "\",\"f\":null}]}";
+  }
+
+  echo " ] }";
+  mysql_close($con); */
+	
 ?>
 	<div class="container">
 		

@@ -150,6 +150,14 @@ div.messages div.evn div.msgs:before {
   width: 0;
 }
 
+
+/* help page styles */
+
+div.full_width p {
+  line-height: 28px;
+}
+
+
 /* blood seeker styles */
 div.wanted {
   border-right: 3px solid rgb(176, 0, 27);

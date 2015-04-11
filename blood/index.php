@@ -133,39 +133,39 @@
 					if(isset($search_donor_error)){
 				?>	
 				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>Warning!</strong> <?php echo $search_donor_error;?>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong>Warning!</strong> <?php echo $search_donor_error;?>
 				</div>
 				<?php
 					}
 					if(isset($success_mesg)){
 				?>	
 				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_mesg;?>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $success_mesg;?>
 				</div>
 				<?php } ?>
 				<form method="post">
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
-					<input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($name)){echo $name;}?>" placeholder="আপনার নাম">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="yourphone">আপনার মোবাইল :</label>
-					<input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($mobile)){echo $mobile;}?>" placeholder="আপনার মোবাইল">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার ডোনার নম্বর (যদি থাকে) :</label>
-					<input type="text" name="seeker_number" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($seeker_number)){echo $seeker_number;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donatefuture">ভবিষ্যতে আপনিও অন্যের দরকারে রক্ত দিতে চান :</label>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="name">আপনার নাম :</label>
+                  <input type="text" name="name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($name)){echo $name;}?>" placeholder="আপনার নাম">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="yourphone">আপনার মোবাইল :</label>
+                  <input type="text" name="mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($mobile)){echo $mobile;}?>" placeholder="আপনার মোবাইল">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donornumber">আপনার ডোনার নম্বর (যদি থাকে) :</label>
+                  <input type="text" name="seeker_number" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($seeker_number)){echo $seeker_number;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donatefuture">ভবিষ্যতে আপনিও অন্যের দরকারে রক্ত দিতে চান :</label>
 						<input type="radio" name="donate_blood" id="donatefuture" value="yes" <?php if(isset($donate_blood)&&($donate_blood == 'yes')){echo 'checked';}?>> হ্যাঁ
 						<input type="radio" name="donate_blood" id="donatefuture" value="no" <?php if(isset($donate_blood)&&($donate_blood == 'no')){echo 'checked';}?>> না
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
-					<select class="form-control" name="division" onchange="this.form.submit()">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার বিভাগ :</label>
+                  <select class="form-control" name="division" onchange="this.form.submit()">
 						<option value="">আপনার বিভাগ পছন্দ করুন</option>
 						<?php
 							foreach($divisions as $division) {
@@ -177,15 +177,15 @@
 								echo '<option value="'.$division->getName().'"  '. $tmpr .'>'.$division->getNameBn().'</option>'; 
 							}
 						?>
-					</select>
+                  </select>
 					
-				  </div>
+               </div>
 				  <?php
 					if ( isset ( $selected_division ) ) {
 				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
-					<select class="form-control" name="district" onchange="this.form.submit()">
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার জেলা :</label>
+                  <select class="form-control" name="district" onchange="this.form.submit()">
 						<option value="">আপনার জেলা পছন্দ করুন</option>
 						<?php
 							foreach($selected_division->getDistricts() as $district) {
@@ -197,15 +197,15 @@
 								echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
 							}
 						?>
-					</select>
-				  </div>
+                  </select>
+               </div>
 				  <?php
 					}
 					if ( isset ( $selected_district ) ) {
 				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="upazila">আপনার থানা :</label>
-					<select class="form-control" name="upazila" onchange="this.form.submit()">
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="upazila">আপনার থানা :</label>
+                  <select class="form-control" name="upazila" onchange="this.form.submit()">
 						<option value="">আপনার থানা পছন্দ করুন</option>
 						<?php
 							foreach ( $selected_district->getUpazilas() as $upozila ) {
@@ -216,10 +216,10 @@
 								echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
 							}
 						?> 
-					</select>
-				  </div>
+                  </select>
+               </div>
 				  <?php } ?>
-				  <button type="submit" name="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
+               <button type="submit" name="search_donor" class="btn btn-info pull-right">খোঁজ করুন</button>
 				</form>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 wanted donor">
@@ -230,107 +230,106 @@
 					if(isset($error_message)){
 				?>	
 				<div class="alert alert-danger alert-dismissible fade in" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>Warning!</strong> <?php echo $error_message;?>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong>Warning!</strong> <?php echo $error_message;?>
 				</div>
 				<?php
 					}
 					if(isset($added_donor)){
 				?>	
 				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $added_donor;?>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <strong><i class="fa fa-check-circle"></i> </strong> <?php echo $added_donor;?>
 				</div>
 				<?php } ?>
 				<form method="post" action="">
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_name">আপনার নাম :</label>
-					<input type="text" name="donor_name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_name)){echo $donor_name;}?>" placeholder="আপনার নাম">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার রক্তের গ্রুপ :</label>
-					<select class="form-control" name="donor_blood_group">
-						<?php if(isset($donor_blood_group)){
-							echo '<option value="'. $donor_blood_group .'" selected>'. $donor_blood_group .'</option>';
-						} ?>
-						<option value="">পছন্দ করুন</option>
-						<option value="a_positive">A+</option>
-						<option value="a_negative">A-</option>
-						<option value="b_positive">B+</option>
-						<option value="b_negative">B-</option>
-						<option value="ab_positive">AB+</option>
-						<option value="ab_negative">AB-</option>
-						<option value="o_positive">O+</option>
-						<option value="o_negative">O-</option>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_mobile">আপনার মোবাইল :</label>
-					<input type="text" name="donor_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_mobile)){echo $donor_mobile;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_secondary_mobile">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
-					<input type="text" name="donor_secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_secondary_mobile)){echo $donor_secondary_mobile;}?>" placeholder="someone@someone.com" style="margin-top: 10px;">
-				  </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_name">আপনার নাম :</label>
+                  <input type="text" name="donor_name" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_name)){echo $donor_name;}?>" placeholder="আপনার নাম">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="district">আপনার রক্তের গ্রুপ :</label>
+                  <select class="form-control" name="donor_blood_group">
+                     <?php if(isset($donor_blood_group)){
+                        echo '<option value="'. $donor_blood_group .'" selected>'. $donor_blood_group .'</option>';
+                     } ?>
+                     <option value="">পছন্দ করুন</option>
+                     <option value="a_positive">A+</option>
+                     <option value="a_negative">A-</option>
+                     <option value="b_positive">B+</option>
+                     <option value="b_negative">B-</option>
+                     <option value="ab_positive">AB+</option>
+                     <option value="ab_negative">AB-</option>
+                     <option value="o_positive">O+</option>
+                     <option value="o_negative">O-</option>
+                  </select>
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_mobile">আপনার মোবাইল :</label>
+                  <input type="text" name="donor_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_mobile)){echo $donor_mobile;}?>" placeholder="আপনার ডোনার নম্বর (যদি থাকে)">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_secondary_mobile">দ্বিতীয় মোবাইল নম্বর/ইমেইল অ্যাড্রেস (অ্যাকাউন্ট সিকিউরিটির জন্য) :</label>
+                  <input type="text" name="donor_secondary_mobile" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_secondary_mobile)){echo $donor_secondary_mobile;}?>" placeholder="someone@someone.com" style="margin-top: 10px;">
+               </div>
 				   <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_division">আপনার বিভাগ :</label>
-					<select class="form-control" name="donor_division" onchange="this.form.submit()">
-						<option value="">আপনার বিভাগ পছন্দ করুন</option>
-						<?php
-							foreach($divisions as $division) {
-								$donor_tmpr = null;
-								if ( isset ( $_POST['donor_division'] ) && ( $division->getName() == $_POST['donor_division'] )) {
-									$donor_tmpr = 'selected';
-									$donor_selected_division = $division;
-								}
-								echo '<option value="'.$division->getName().'"  '. $donor_tmpr .'>'.$division->getNameBn().'</option>'; 
-							}
-						?>
-					</select>
-					
-				  </div>
-				  <?php
-					if ( isset ( $donor_selected_division ) ) {
-				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_district">আপনার জেলা :</label>
-					<select class="form-control" name="donor_district" onchange="this.form.submit()">
-						<option value="">আপনার জেলা পছন্দ করুন</option>
-						<?php
-							foreach($donor_selected_division->getDistricts() as $district) {
-								$tmpr = null;
-								if ( isset ( $_POST['donor_district'] ) && ($_POST['donor_district'] == $district->getName())) {
-									$tmpr = 'selected';
-									$donor_selected_district = $district;
-								}
-								echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
-							}
-						?>
-					</select>
-				  </div>
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_division">আপনার বিভাগ :</label>
+                  <select class="form-control" name="donor_division" onchange="this.form.submit()">
+                     <option value="">আপনার বিভাগ পছন্দ করুন</option>
+                     <?php
+                        foreach($divisions as $division) {
+                           $donor_tmpr = null;
+                           if ( isset ( $_POST['donor_division'] ) && ( $division->getName() == $_POST['donor_division'] )) {
+                              $donor_tmpr = 'selected';
+                              $donor_selected_division = $division;
+                           }
+                           echo '<option value="'.$division->getName().'"  '. $donor_tmpr .'>'.$division->getNameBn().'</option>'; 
+                        }
+                     ?>
+                  </select>
+               </div>
+              <?php
+               if ( isset ( $donor_selected_division ) ) {
+              ?>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_district">আপনার জেলা :</label>
+                  <select class="form-control" name="donor_district" onchange="this.form.submit()">
+                     <option value="">আপনার জেলা পছন্দ করুন</option>
+                     <?php
+                        foreach($donor_selected_division->getDistricts() as $district) {
+                           $tmpr = null;
+                           if ( isset ( $_POST['donor_district'] ) && ($_POST['donor_district'] == $district->getName())) {
+                              $tmpr = 'selected';
+                              $donor_selected_district = $district;
+                           }
+                           echo '<option '. $tmpr . ' value="'.$district->getName().'">'.$district->getNameBn().'</option>';
+                        }
+                     ?>
+                  </select>
+               </div>
 				  <?php
 					}
 					if ( isset ( $donor_selected_district ) ) {
 				  ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_upazila">আপনার থানা :</label>
-					<select class="form-control" name="donor_upazila" onchange="this.form.submit()">
-						<option value="">আপনার থানা পছন্দ করুন</option>
-						<?php
-							foreach ( $donor_selected_district->getUpazilas() as $upozila ) {
-								$tmpr = null;
-								if ( ( isset ($_POST['donor_upazila']) ) && ($upozila->getName() == $_POST['donor_upazila']) ) {
-									$tmpr = 'selected';
-								}
-								echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
-							}
-						?> 
-					</select>
-				  </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_upazila">আপনার থানা :</label>
+                  <select class="form-control" name="donor_upazila" onchange="this.form.submit()">
+                     <option value="">আপনার থানা পছন্দ করুন</option>
+                     <?php
+                        foreach ( $donor_selected_district->getUpazilas() as $upozila ) {
+                           $tmpr = null;
+                           if ( ( isset ($_POST['donor_upazila']) ) && ($upozila->getName() == $_POST['donor_upazila']) ) {
+                              $tmpr = 'selected';
+                           }
+                           echo '<option '. $tmpr .' value="'. $upozila->getName() .'">'. $upozila->getNameBn() .'</option>';
+                        }
+                     ?> 
+                  </select>
+               </div>
 				  <?php } ?>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_birth_year">জন্ম তারিখ :</label>
-					<select class="form-control dob" name="donor_birth_year">
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_birth_year">জন্ম তারিখ :</label>
+                  <select class="form-control dob" name="donor_birth_year">
 						<?php if(isset($donor_birth_year) && ($donor_birth_year != '')){
 							echo '<option value="'. $donor_birth_year .'" selected>'. $donor_birth_year .'</option>';
 						} ?>
@@ -347,37 +346,37 @@
 								}
 							}
 						?>
-					</select>
-					<select class="form-control dob" name="donor_birth_month">
-						<?php if(isset($donor_birth_month) && ($donor_birth_year != '')){
-							echo '<option value="'. $donor_birth_month .'" selected>'. $donor_birth_month .'</option>';
-						} ?>
-						<option value="">মাস</option>
-						<?php
-							for($mnth = 1; $mnth <= 12; $mnth++){
-								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
-							}
-						?>
-					</select>
-					<select class="form-control dob" name="donor_birth_day">
-						<?php if(isset($donor_birth_day) && ($donor_birth_year != '')){
-							echo '<option value="'. $donor_birth_day .'" selected>'. $donor_birth_day .'</option>';
-						} ?>
-						<option value="">দিন</option>
-						<?php
-							for($dy = 1; $dy <= 31; $dy++){
-								echo '<option value="'. $dy .'">'. $dy .'</option>';
-							}
-						?>
-					</select>
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_weight">আপনার ওজন (কেজি) :</label>
-					<input type="text" name="donor_weight" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_weight)){echo $donor_weight;}?>" placeholder="আপনার ওজন">
-				  </div>
-				  <div class="form-group clearfix">
-					<label class="col-lg-6 col-md-6 col-sm-6" for="donor_last_donation_year">শেষ কবে রক্ত দিয়েছেন :</label>
-					<select class="form-control dob" name="donor_last_donation_year">
+                  </select>
+                  <select class="form-control dob" name="donor_birth_month">
+                     <?php if(isset($donor_birth_month) && ($donor_birth_year != '')){
+                        echo '<option value="'. $donor_birth_month .'" selected>'. $donor_birth_month .'</option>';
+                     } ?>
+                     <option value="">মাস</option>
+                     <?php
+                        for($mnth = 1; $mnth <= 12; $mnth++){
+                           echo '<option value="'. $mnth .'">'. $mnth .'</option>';
+                        }
+                     ?>
+                  </select>
+                  <select class="form-control dob" name="donor_birth_day">
+                     <?php if(isset($donor_birth_day) && ($donor_birth_year != '')){
+                        echo '<option value="'. $donor_birth_day .'" selected>'. $donor_birth_day .'</option>';
+                     } ?>
+                     <option value="">দিন</option>
+                     <?php
+                        for($dy = 1; $dy <= 31; $dy++){
+                           echo '<option value="'. $dy .'">'. $dy .'</option>';
+                        }
+                     ?>
+                  </select>
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_weight">আপনার ওজন (কেজি) :</label>
+                  <input type="text" name="donor_weight" class="col-lg-6 col-md-6 col-sm-6 form-control" value="<?php if(isset($donor_weight)){echo $donor_weight;}?>" placeholder="আপনার ওজন">
+               </div>
+               <div class="form-group clearfix">
+                  <label class="col-lg-6 col-md-6 col-sm-6" for="donor_last_donation_year">শেষ কবে রক্ত দিয়েছেন :</label>
+                  <select class="form-control dob" name="donor_last_donation_year">
 						<?php if(isset($donor_last_donation_year) && ($donor_birth_year != '')){
 							echo '<option value="'. $donor_last_donation_year .'" selected>'. $donor_last_donation_year .'</option>';
 						} ?>
@@ -387,8 +386,8 @@
 							echo '<option value="201'. $yr .'">201'. $yr .'</option>';
 						}
 						?>
-					</select>
-					<select class="form-control dob" name="donor_last_donation_month">
+                  </select>
+                  <select class="form-control dob" name="donor_last_donation_month">
 						<?php if(isset($donor_last_donation_month) && ($donor_birth_year != '')){
 							echo '<option value="'. $donor_last_donation_month .'" selected>'. $donor_last_donation_month .'</option>';
 						} ?>
@@ -398,8 +397,8 @@
 								echo '<option value="'. $mnth .'">'. $mnth .'</option>';
 							}
 						?>
-					</select>
-					<select class="form-control dob" name="donor_last_donation_day">
+                  </select>
+                  <select class="form-control dob" name="donor_last_donation_day">
 						<?php if(isset($donor_last_donation_day) && ($donor_birth_year != '')){
 							echo '<option value="'. $donor_last_donation_day .'" selected>'. $donor_last_donation_day .'</option>';
 						} ?>
@@ -409,9 +408,9 @@
 								echo '<option value="'. $dy .'">'. $dy .'</option>';
 							}
 						?>
-					</select>
-				  </div>
-				  <button type="submit" name="add_donor_list" class="btn btn-info pull-right">তালিকাভূক্ত হোন</button>
+                  </select>
+               </div>
+               <button type="submit" name="add_donor_list" class="btn btn-info pull-right">তালিকাভূক্ত হোন</button>
 				</form>
 			</div>
 		</div>

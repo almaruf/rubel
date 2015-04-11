@@ -42,7 +42,7 @@ div.slicknav_menu{
 }
 
 /* header styles */
-header{
+div.header_area{
 background: #B0001B;
 }
 div.header_right form {
@@ -261,7 +261,7 @@ div#pro_pic {
 
 /* footer styles */
 
-section.footer_area {
+div.footer_area {
 background: none repeat scroll 0 0 rgb(255, 255, 255);
 border-top: 2px solid rgb(176, 0, 27);
 bottom: 0;
@@ -269,10 +269,10 @@ padding: 20px 0;
 position: fixed;
 width: 100%;
 }
-section.footer_area p {
+div.footer_area p {
   margin: 0 auto;
 }
-section.footer_area p a {
+div.footer_area p a {
 color: rgb(176, 0, 27);
 }
 
